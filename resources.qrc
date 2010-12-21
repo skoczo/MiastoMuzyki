@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>header.jpg</file>
+        <file>all.pls</file>
+        <file>brak.jpg</file>
+        <file>strzalka.gif</file>
+    </qresource>
+</RCC>
