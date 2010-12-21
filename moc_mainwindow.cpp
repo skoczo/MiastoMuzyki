@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Sun Dec 12 14:11:09 2010
+** Created: Tue Dec 21 20:38:34 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,20 +31,22 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: signature, parameters, type, tag, flags
-      18,   12,   11,   11, 0x08,
-      59,   11,   11,   11, 0x08,
-      69,   11,   11,   11, 0x08,
-      80,   78,   11,   11, 0x08,
-      96,   78,   11,   11, 0x08,
+      12,   11,   11,   11, 0x08,
+      50,   44,   11,   11, 0x08,
+      91,   11,   11,   11, 0x08,
+     101,   11,   11,   11, 0x08,
+     112,  110,   11,   11, 0x08,
+     128,  110,   11,   11, 0x08,
+     148,  110,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindow[] = {
-    "MainWindow\0\0index\0"
-    "on_listWidget_doubleClicked(QModelIndex)\0"
+    "MainWindow\0\0on_actionUstawienia_triggered()\0"
+    "index\0on_listWidget_doubleClicked(QModelIndex)\0"
     "newSong()\0update()\0p\0image(QPixmap*)\0"
-    "imageNext(QPixmap*)\0"
+    "imageNext(QPixmap*)\0setProxy(QNetworkProxy)\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -76,14 +78,16 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: on_listWidget_doubleClicked((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
-        case 1: newSong(); break;
-        case 2: update(); break;
-        case 3: image((*reinterpret_cast< QPixmap*(*)>(_a[1]))); break;
-        case 4: imageNext((*reinterpret_cast< QPixmap*(*)>(_a[1]))); break;
+        case 0: on_actionUstawienia_triggered(); break;
+        case 1: on_listWidget_doubleClicked((*reinterpret_cast< QModelIndex(*)>(_a[1]))); break;
+        case 2: newSong(); break;
+        case 3: update(); break;
+        case 4: image((*reinterpret_cast< QPixmap*(*)>(_a[1]))); break;
+        case 5: imageNext((*reinterpret_cast< QPixmap*(*)>(_a[1]))); break;
+        case 6: setProxy((*reinterpret_cast< QNetworkProxy(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 7;
     }
     return _id;
 }

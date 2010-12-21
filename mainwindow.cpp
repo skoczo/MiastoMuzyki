@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Miasto Muzyki");
 
+    //proxy
+    proxyDial=new proxyDialog(this);
+
     //set description colors
     ui->tytul->setText(tr("<font color=yellow>Tutuł: </font>"));
     ui->wykonawca->setText(tr("<font color=yellow>Artysta: </font>"));
@@ -102,6 +105,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(load,SIGNAL(image(QPixmap*)),this,SLOT(image(QPixmap*)));
     //this function load next track image to label
     connect(loadNext,SIGNAL(image(QPixmap*)),this,SLOT(imageNext(QPixmap*)));
+    //proxy setup
+    connect(proxyDial,SIGNAL(data_ok(QNetworkProxy)),this,SLOT(setProxy(QNetworkProxy)));
 
     //timer
     timer=new QTimer(this);
@@ -109,6 +114,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),data,SLOT(update()));
     //run this function every 1 second
     timer->start(1000);
+}
+
+/*proxy setup function*/
+void MainWindow::setProxy(QNetworkProxy p)
+{
+    mediaObject->stop();
+
+    QNetworkProxy::setApplicationProxy(p);
+
+    qDebug("Proxy setup");
 }
 
 /*this function update information about
@@ -283,4 +298,9 @@ void MainWindow::on_listWidget_doubleClicked(QModelIndex index)
     mediaObject->play();
 
     info->show(actualStation);
+}
+
+void MainWindow::on_actionUstawienia_triggered()
+{
+    proxyDial->show();
 }

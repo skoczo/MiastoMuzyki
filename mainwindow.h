@@ -15,11 +15,13 @@
 #include <phonon/phonon>
 #include <phonon/AudioOutput>
 #include <QMessageBox>
+#include <QNetworkProxy>
 #include "parser.h"
 #include "dataupdater.h"
 #include "trackinfo.h"
 #include "lista.h"
 #include "imageload.h"
+#include "proxydialog.h"
 
 namespace Ui {
     class MainWindow;
@@ -61,14 +63,19 @@ private:
 
     QString stringChange(QString s);
     QString actualStation;
+
+    proxyDialog *proxyDial;
+
     void loadDataToList();
 
 private slots:
+    void on_actionUstawienia_triggered();
     void on_listWidget_doubleClicked(QModelIndex index);
     void newSong();
     void update();
     void image(QPixmap *p);
     void imageNext(QPixmap *p);
+    void setProxy(QNetworkProxy p);
 };
 
 #endif // MAINWINDOW_H

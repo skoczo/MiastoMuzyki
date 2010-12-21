@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'oknoprogramu.ui'
 **
-** Created: Mon Dec 20 18:06:44 2010
+** Created: Tue Dec 21 14:46:10 2010
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -21,6 +21,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QListWidget>
 #include <QtGui/QMainWindow>
+#include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
@@ -32,6 +33,8 @@ QT_BEGIN_NAMESPACE
 class Ui_OknoProgramu
 {
 public:
+    QAction *actionO_programie;
+    QAction *actionUstawienia;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -71,6 +74,8 @@ public:
     QLabel *header;
     QListWidget *listWidget;
     QMenuBar *menubar;
+    QMenu *menuUstawienia;
+    QMenu *menuPomoc;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *OknoProgramu)
@@ -78,6 +83,10 @@ public:
         if (OknoProgramu->objectName().isEmpty())
             OknoProgramu->setObjectName(QString::fromUtf8("OknoProgramu"));
         OknoProgramu->resize(476, 418);
+        actionO_programie = new QAction(OknoProgramu);
+        actionO_programie->setObjectName(QString::fromUtf8("actionO_programie"));
+        actionUstawienia = new QAction(OknoProgramu);
+        actionUstawienia->setObjectName(QString::fromUtf8("actionUstawienia"));
         centralwidget = new QWidget(OknoProgramu);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout_2 = new QHBoxLayout(centralwidget);
@@ -264,10 +273,19 @@ public:
         menubar = new QMenuBar(OknoProgramu);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 476, 23));
+        menuUstawienia = new QMenu(menubar);
+        menuUstawienia->setObjectName(QString::fromUtf8("menuUstawienia"));
+        menuPomoc = new QMenu(menubar);
+        menuPomoc->setObjectName(QString::fromUtf8("menuPomoc"));
         OknoProgramu->setMenuBar(menubar);
         statusbar = new QStatusBar(OknoProgramu);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         OknoProgramu->setStatusBar(statusbar);
+
+        menubar->addAction(menuUstawienia->menuAction());
+        menubar->addAction(menuPomoc->menuAction());
+        menuUstawienia->addAction(actionUstawienia);
+        menuPomoc->addAction(actionO_programie);
 
         retranslateUi(OknoProgramu);
 
@@ -277,6 +295,8 @@ public:
     void retranslateUi(QMainWindow *OknoProgramu)
     {
         OknoProgramu->setWindowTitle(QApplication::translate("OknoProgramu", "MainWindow", 0, QApplication::UnicodeUTF8));
+        actionO_programie->setText(QApplication::translate("OknoProgramu", "O programie", 0, QApplication::UnicodeUTF8));
+        actionUstawienia->setText(QApplication::translate("OknoProgramu", "Proxy", 0, QApplication::UnicodeUTF8));
         teraz->setText(QApplication::translate("OknoProgramu", "Teraz", 0, QApplication::UnicodeUTF8));
         Okladka->setText(QString());
         wykonawca->setText(QApplication::translate("OknoProgramu", "Wykonawca:", 0, QApplication::UnicodeUTF8));
@@ -298,6 +318,8 @@ public:
         NastepnaPlyta->setText(QString());
         NastepnaRok->setText(QString());
         header->setText(QString());
+        menuUstawienia->setTitle(QApplication::translate("OknoProgramu", "Ustawienia", 0, QApplication::UnicodeUTF8));
+        menuPomoc->setTitle(QApplication::translate("OknoProgramu", "Pomoc", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

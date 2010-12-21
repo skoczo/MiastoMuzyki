@@ -36,82 +36,87 @@ void trackInfo::finished(QNetworkReply *reply)
     {
         utwor *u=NULL;
         QString dane(reply->readAll());
-        QString tmp;
-        QChar c;
 
-        int i=0;
-
-        bool petla=true;
-        while(petla)
+        if(dane.length()!=0)
         {
-            tmp="";
-            while(dane[i]!='\'')
+
+            QString tmp;
+            QChar c;
+
+            int i=0;
+
+            bool petla=true;
+            while(petla)
+            {
+                tmp="";
+                while(dane[i]!='\'')
+                    i++;
+
                 i++;
+                if(i<dane.length())
+                   c=dane.at(i);
 
-            i++;
-            if(i<dane.length())
-               c=dane.at(i);
-
-            while(c!='\'')
-            {
-                i++;
-
-                if(i>=dane.length())
+                while(c!='\'')
                 {
-                    petla=false;
-                    break;
+                    i++;
+
+                    if(i>=dane.length())
+                    {
+                        petla=false;
+                        break;
+                    }
+
+                    tmp.append(c);
+                    c=dane.at(i);
                 }
 
-                tmp.append(c);
-                c=dane.at(i);
-            }
-
-            if(tmp=="teraz")
-            {
-                u=&l->aktualny;
-            }
-            else if(tmp=="pozniej")
-            {
-                u=&l->nastepny;
-            }
-            else if(tmp=="idp")
-            {
-                if(u!=NULL)
+                if(tmp=="teraz")
                 {
-                    szukanie(tmp,i,dane,petla);
-                    u->idp=tmp;
+                    u=&l->aktualny;
                 }
-            }
-            else if(tmp=="wyk")
-            {
-                if(u!=NULL)
+                else if(tmp=="pozniej")
                 {
-                    szukanie(tmp,i,dane,petla);
-                    u->wykonawca=tmp;
+                    u=&l->nastepny;
                 }
-            }
-            else if(tmp=="tyt")
-            {
-                if(u!=NULL)
+                else if(tmp=="idp")
                 {
-                    szukanie(tmp,i,dane,petla);
-                    u->tytul=tmp;
+                    if(u!=NULL)
+                    {
+                        szukanie(tmp,i,dane,petla);
+                        u->idp=tmp;
+                    }
                 }
-            }
-            else if(tmp=="ply")
-            {
-                if(u!=NULL)
+                else if(tmp=="wyk")
                 {
-                    szukanie(tmp,i,dane,petla);
-                    u->plyta=tmp;
+                    if(u!=NULL)
+                    {
+                        szukanie(tmp,i,dane,petla);
+                        u->wykonawca=tmp;
+                    }
                 }
-            }
-            else if(tmp=="rok")
-            {
-                if(u!=NULL)
+                else if(tmp=="tyt")
                 {
-                    szukanie(tmp,i,dane,petla);
-                    u->rok=tmp;
+                    if(u!=NULL)
+                    {
+                        szukanie(tmp,i,dane,petla);
+                        u->tytul=tmp;
+                    }
+                }
+                else if(tmp=="ply")
+                {
+                    if(u!=NULL)
+                    {
+                        szukanie(tmp,i,dane,petla);
+                        u->plyta=tmp;
+                    }
+                }
+                else if(tmp=="rok")
+                {
+                    if(u!=NULL)
+                    {
+                        szukanie(tmp,i,dane,petla);
+                        u->rok=tmp;
+                    }
                 }
             }
         }

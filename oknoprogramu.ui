@@ -299,8 +299,32 @@
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuUstawienia">
+    <property name="title">
+     <string>Ustawienia</string>
+    </property>
+    <addaction name="actionUstawienia"/>
+   </widget>
+   <widget class="QMenu" name="menuPomoc">
+    <property name="title">
+     <string>Pomoc</string>
+    </property>
+    <addaction name="actionO_programie"/>
+   </widget>
+   <addaction name="menuUstawienia"/>
+   <addaction name="menuPomoc"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionO_programie">
+   <property name="text">
+    <string>O programie</string>
+   </property>
+  </action>
+  <action name="actionUstawienia">
+   <property name="text">
+    <string>Proxy</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
