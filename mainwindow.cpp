@@ -63,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
         exit(-1);
     }
 
+
     path = Phonon::createPath(mediaObject, audioOutput);
 
     while(!path.isValid())
@@ -129,6 +130,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),data,SLOT(update()));
     //run this function every 1 second
     timer->start(1000);    
+
 }
 
 /*proxy setup function*/
