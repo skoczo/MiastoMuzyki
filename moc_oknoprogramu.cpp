@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'oknoprogramu.h'
 **
-** Created: Thu Dec 9 18:34:29 2010
+** Created: Sat Jan 15 17:37:34 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!

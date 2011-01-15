@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <iostream>
+#include <QStringList>
 #include <QFile>
 #include <QPicture>
 #include <QMainWindow>
@@ -16,6 +17,7 @@
 #include <phonon/AudioOutput>
 #include <QMessageBox>
 #include <QNetworkProxy>
+#include <BackendCapabilities>
 #include "parser.h"
 #include "dataupdater.h"
 #include "trackinfo.h"

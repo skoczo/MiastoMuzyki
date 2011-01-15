@@ -12,6 +12,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Miasto Muzyki");
 
+    QStringList capabiliteisList= Phonon::BackendCapabilities::availableMimeTypes();
+    capabiliteisList.sort();
+    qDebug("########Cap Start###########");
+
+    for(int i=0;i<capabiliteisList.size();i++)
+    {
+        qDebug(QString(capabiliteisList[i]).toAscii());
+    }
+
+    qDebug("########Cap End###########");
+
     //proxy
     proxyDial=new proxyDialog(this);
 
@@ -67,6 +78,10 @@ MainWindow::MainWindow(QWidget *parent) :
     if (mediaObject->state() == Phonon::LoadingState) { std::cout << "state 0\n"; }
     if (mediaObject->isSeekable()) { std::cout << "Seekable!\n"; } else { std::cout << "NOT SEEKABLE!\n"; }
 
+    //audioOutput->setVolume(100);
+    //audioOutput->setVolumeDecibel(0);
+
+
     //this object gets <station_name,station_url>
     //need this for play station
     stations=new QMap<QString,QString>;
@@ -106,14 +121,14 @@ MainWindow::MainWindow(QWidget *parent) :
     //this function load next track image to label
     connect(loadNext,SIGNAL(image(QPixmap*)),this,SLOT(imageNext(QPixmap*)));
     //proxy setup
-    connect(proxyDial,SIGNAL(data_ok(QNetworkProxy)),this,SLOT(setProxy(QNetworkProxy)));
+    //connect(proxyDial,SIGNAL(data_ok(QNetworkProxy)),this,SLOT(setProxy(QNetworkProxy)));
 
     //timer
     timer=new QTimer(this);
     //timer run update function
     connect(timer,SIGNAL(timeout()),data,SLOT(update()));
     //run this function every 1 second
-    timer->start(1000);
+    timer->start(1000);    
 }
 
 /*proxy setup function*/
@@ -294,7 +309,9 @@ void MainWindow::on_listWidget_doubleClicked(QModelIndex index)
     mediaObject->stop();
     int row=index.row();
     actualStation=ui->listWidget->item(row)->text();
-    mediaObject->setCurrentSource(Phonon::MediaSource((*stations)[actualStation]));
+    qDebug(("Station name: "+ui->listWidget->item(row)->text()).toAscii()+"\n");
+    qDebug(("Station url: "+(*stations)[actualStation]+"\n").toAscii());
+    mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
     mediaObject->play();
 
     info->show(actualStation);
