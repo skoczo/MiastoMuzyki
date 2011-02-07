@@ -37,3 +37,12 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     resources.qrc
+
+win32 {
+debug {
+    CONFIG+= console
+    DESTDIR = ../debug
+ } else {
+    DESTDIR = ../release
+    }
+}
