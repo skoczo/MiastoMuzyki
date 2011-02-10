@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui(new Ui::MainWindow)
     ui(new Ui::OknoProgramu)
 {
+    isPlay=false;
+
     //set application name
     QCoreApplication::setApplicationName("MiastoMuzyki");
     ui->setupUi(this);
@@ -49,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mediaObject = new Phonon::MediaObject(this);
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
+    audioOutput->setVolume((qreal)1.0);
 
     if(mediaObject==NULL||mediaObject->errorType()!=0||audioOutput==NULL)
     {
@@ -109,12 +112,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //add parsed data from QMapIterator<QString,QString> to window
     this->loadDataToList();
+    ui->listWidget->setCurrentRow(0);
 
     //wait for new song
-    data=new dataUpdater(mediaObject);
+    //data=new dataUpdater(mediaObject);
+
+    //progress bar
+    progressBar=new QProgressBar(ui->statusBar);
+
+    //ui->statusBar->addWidget(new QLabel("Bufor: "));
+    //ui->statusBar->addWidget(progressBar);
+
+    progressBar->setRange(0, 100);
+    //connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar, SLOT(setValue(int)));
+    connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
+
+    //set volume widget
+    ui->volume->setRange(0,100);
+    ui->volume->setValue(audioOutput->volume()*100);
+    connect(ui->volume,SIGNAL(valueChanged(int)),this,SLOT(setVolume(int)));
 
     //if new song
-    connect(data,SIGNAL(newSong()),this,SLOT(newSong()));
+    //connect(data,SIGNAL(newSong()),this,SLOT(newSong()));
+    connect(mediaObject,SIGNAL(metaDataChanged()),this,SLOT(newSong()));
     //if track info emit e_dane run aktualizacja function
     connect(info,SIGNAL(dataReady()),this,SLOT(update()));
     //this function load actual track image to label
@@ -123,14 +143,28 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(loadNext,SIGNAL(image(QPixmap*)),this,SLOT(imageNext(QPixmap*)));
     //proxy setup
     //connect(proxyDial,SIGNAL(data_ok(QNetworkProxy)),this,SLOT(setProxy(QNetworkProxy)));
+    connect(ui->play_pause,SIGNAL(clicked()),this,SLOT(play_pause()));
 
     //timer
-    timer=new QTimer(this);
+    //timer=new QTimer(this);
     //timer run update function
-    connect(timer,SIGNAL(timeout()),data,SLOT(update()));
+    //connect(timer,SIGNAL(timeout()),data,SLOT(update()));
     //run this function every 1 second
-    timer->start(1000);    
+    //timer->start(1000);
+}
 
+void MainWindow::setVolume(int i)
+{
+    audioOutput->setVolume((qreal)i/100.0);
+}
+
+//test slot
+void MainWindow::test(int i)
+{
+    std::stringstream ss;
+    ss << i;
+    qDebug("test buffer: ");
+    qDebug(ss.str().c_str());
 }
 
 /*proxy setup function*/
@@ -308,7 +342,16 @@ play clicked station
  */
 void MainWindow::on_listWidget_doubleClicked(QModelIndex index)
 {
-    mediaObject->stop();
+    if(isPlay)
+    {
+        mediaObject->stop();
+    }
+    else
+    {
+        isPlay=true;
+        ui->play_pause->setText("Stop");
+    }
+
     int row=index.row();
     actualStation=ui->listWidget->item(row)->text();
     qDebug(("Station name: "+ui->listWidget->item(row)->text()).toAscii()+"\n");
@@ -316,7 +359,35 @@ void MainWindow::on_listWidget_doubleClicked(QModelIndex index)
     mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
     mediaObject->play();
 
+
     info->show(actualStation);
+}
+
+/**
+ * play/stop button clicked
+ */
+void MainWindow::play_pause()
+{
+    if(!isPlay)
+    {
+        mediaObject->stop();
+        int row=ui->listWidget->currentRow();
+        actualStation=ui->listWidget->item(row)->text();
+        qDebug(("Station name: "+ui->listWidget->item(row)->text()).toAscii()+"\n");
+        qDebug(("Station url: "+(*stations)[actualStation]+"\n").toAscii());
+        mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
+        mediaObject->play();
+        info->show(actualStation);
+        ui->play_pause->setText("Stop");
+        isPlay=true;
+    }
+    else
+    {
+        mediaObject->stop();
+        ui->play_pause->setText("Play");
+        isPlay=false;
+    }
+
 }
 
 void MainWindow::on_actionUstawienia_triggered()

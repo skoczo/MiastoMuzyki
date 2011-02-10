@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <iostream>
+#include <sstream>
 #include <QStringList>
 #include <QFile>
 #include <QPicture>
@@ -18,6 +19,7 @@
 #include <QMessageBox>
 #include <QNetworkProxy>
 #include <BackendCapabilities>
+#include <QProgressBar>
 #include "parser.h"
 #include "dataupdater.h"
 #include "trackinfo.h"
@@ -48,15 +50,18 @@ private:
     Phonon::AudioOutput *audioOutput;
     Phonon::Path path;
 
-    /*this maps have information about stations
-        stations<station name, station url>
-        identyficators<station name, station number>
+    /**
+    *this maps have information about stations
+    *    stations<station name, station url>
+    *    identyficators<station name, station number>
     */
     QMap<QString,QString> *stations;
     QMap<QString,QString> *identificators;
 
+    //variable to check play/stop
+    bool isPlay;
 
-    dataUpdater *data;
+    //dataUpdater *data;
     QTimer *timer;
     trackInfo *info;
     list *lis;
@@ -68,6 +73,8 @@ private:
 
     proxyDialog *proxyDial;
 
+    QProgressBar *progressBar;
+
     void loadDataToList();
 
 private slots:
@@ -78,6 +85,9 @@ private slots:
     void image(QPixmap *p);
     void imageNext(QPixmap *p);
     void setProxy(QNetworkProxy p);
+    void test(int i);
+    void setVolume(int);
+    void play_pause();
 };
 
 #endif // MAINWINDOW_H

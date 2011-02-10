@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'oknoprogramu.ui'
 **
-** Created: Sat Jan 15 17:37:15 2011
+** Created: Thu Feb 10 18:43:12 2011
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -23,6 +23,8 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QPushButton>
+#include <QtGui/QSlider>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QStatusBar>
 #include <QtGui/QVBoxLayout>
@@ -71,12 +73,15 @@ public:
     QLabel *NastepnaRok;
     QSpacerItem *verticalSpacer_2;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_5;
+    QPushButton *play_pause;
+    QSlider *volume;
     QLabel *header;
     QListWidget *listWidget;
     QMenuBar *menubar;
     QMenu *menuUstawienia;
     QMenu *menuPomoc;
-    QStatusBar *statusbar;
+    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *OknoProgramu)
     {
@@ -252,6 +257,22 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        play_pause = new QPushButton(centralwidget);
+        play_pause->setObjectName(QString::fromUtf8("play_pause"));
+
+        horizontalLayout_5->addWidget(play_pause);
+
+        volume = new QSlider(centralwidget);
+        volume->setObjectName(QString::fromUtf8("volume"));
+        volume->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_5->addWidget(volume);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
         header = new QLabel(centralwidget);
         header->setObjectName(QString::fromUtf8("header"));
 
@@ -278,9 +299,9 @@ public:
         menuPomoc = new QMenu(menubar);
         menuPomoc->setObjectName(QString::fromUtf8("menuPomoc"));
         OknoProgramu->setMenuBar(menubar);
-        statusbar = new QStatusBar(OknoProgramu);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        OknoProgramu->setStatusBar(statusbar);
+        statusBar = new QStatusBar(OknoProgramu);
+        statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        OknoProgramu->setStatusBar(statusBar);
 
         menubar->addAction(menuUstawienia->menuAction());
         menubar->addAction(menuPomoc->menuAction());
@@ -317,6 +338,7 @@ public:
         NastepnaTytul->setText(QString());
         NastepnaPlyta->setText(QString());
         NastepnaRok->setText(QString());
+        play_pause->setText(QApplication::translate("OknoProgramu", "Play", 0, QApplication::UnicodeUTF8));
         header->setText(QString());
         menuUstawienia->setTitle(QApplication::translate("OknoProgramu", "Ustawienia", 0, QApplication::UnicodeUTF8));
         menuPomoc->setTitle(QApplication::translate("OknoProgramu", "Pomoc", 0, QApplication::UnicodeUTF8));

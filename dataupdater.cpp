@@ -13,6 +13,7 @@ dataUpdater::dataUpdater(Phonon::MediaObject *m)
 */
 void dataUpdater::update()
 {
+
     //if aktualizacja is true signal newSong is emitted
     bool aktualizacja=false;
 

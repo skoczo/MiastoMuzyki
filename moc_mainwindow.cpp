@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Sat Jan 15 17:46:55 2011
+** Created: Thu Feb 10 18:43:28 2011
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindow[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -38,6 +38,9 @@ static const uint qt_meta_data_MainWindow[] = {
      112,  110,   11,   11, 0x08,
      128,  110,   11,   11, 0x08,
      148,  110,   11,   11, 0x08,
+     174,  172,   11,   11, 0x08,
+     184,   11,   11,   11, 0x08,
+     199,   11,   11,   11, 0x08,
 
        0        // eod
 };
@@ -47,6 +50,7 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "index\0on_listWidget_doubleClicked(QModelIndex)\0"
     "newSong()\0update()\0p\0image(QPixmap*)\0"
     "imageNext(QPixmap*)\0setProxy(QNetworkProxy)\0"
+    "i\0test(int)\0setVolume(int)\0play_pause()\0"
 };
 
 const QMetaObject MainWindow::staticMetaObject = {
@@ -85,9 +89,12 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 4: image((*reinterpret_cast< QPixmap*(*)>(_a[1]))); break;
         case 5: imageNext((*reinterpret_cast< QPixmap*(*)>(_a[1]))); break;
         case 6: setProxy((*reinterpret_cast< QNetworkProxy(*)>(_a[1]))); break;
+        case 7: test((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: setVolume((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 9: play_pause(); break;
         default: ;
         }
-        _id -= 7;
+        _id -= 10;
     }
     return _id;
 }
