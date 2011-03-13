@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'loader.ui'
 **
-** Created: Sun Mar 13 13:52:58 2011
+** Created: Sun Mar 13 16:39:36 2011
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

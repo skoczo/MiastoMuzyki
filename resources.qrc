@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file alias="header.jpg">images/header.jpg</file>
-        <file alias="all.pls">stations/all.pls</file>
         <file alias="brak.jpg">images/brak.jpg</file>
         <file alias="strzalka.gif">images/strzalka.gif</file>
     </qresource>

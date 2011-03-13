@@ -329,7 +329,7 @@ void MainWindow::loadDataToList()
     {
         i.next();
 
-        ui->listWidget->addItem(i.key());
+        ui->listWidget->addItem(tr(i.key().toAscii()));
     }
 }
 

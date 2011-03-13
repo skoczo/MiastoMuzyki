@@ -1,203 +1,311 @@
-[playlist]
-Version=2
-File1=mmsh://195.150.20.225/20LAT?MP3xt=.asf
-Ident=82
-Title1=20 lat RMF FM
-File2=mmsh://195.150.20.225/2000?MP3xt=.asf
-Ident=81
-Title2=RMF 2000
-File3=mmsh://195.150.20.225/50S?MP3xt=.asf
-Ident=48
-Title3=RMF 50s
-File4=mmsh://195.150.20.225/60S?MP3xt=.asf
-Ident=44
-Title4=RMF 60s
-File5=mmsh://195.150.20.225/70S?MP3xt=.asf
-Ident=45
-Title5=RMF 70s
-File6=mmsh://195.150.20.225/80S?MP3xt=.asf
-Ident=25
-Title6=RMF 80s
-File7=mmsh://195.150.20.225/90S?MP3xt=.asf
-Ident=46
-Title7=RMF 90s
-File8=mmsh://195.150.20.225/ALTERNATYWA?MP3xt=.asf
-Ident=28
-Title8=RMF Alternatywa
-File9=mmsh://195.150.20.225/AUDIORIVER?MP3xt=.asf
-Ident=91
-Title9=RMF Audioriver
-File10=mmsh://195.150.20.225/BABY?MP3xt=.asf
-Ident=43
-Title10=RMF Baby
-File11=mmsh://195.150.20.225/BEATLEMANIA?MP3xt=.asf
-Ident=77
-Title11=RMF Beatle Mania
-File12=mmsh://195.150.20.225/BLUES?MP3xt=.asf
-Ident=39
-Title12=RMF Blues
-File13=mmsh://195.150.20.225/BRAVO?MP3xt=.asf
-Ident=12
-Title13=RMF Bravo
-File14=mmsh://195.150.20.225/CELTIC?MP3xt=.asf
-Ident=67
-Title14=RMF Celtic
-File15=mmsh://195.150.20.225/CHILLOUT?MP3xt=.asf
-Ident=11
-Title15=RMF Chillout
-File16=mmsh://195.150.20.225/CHOPIN?MP3xt=.asf
-Ident=85
-Title16=RMF Chopin
-File17=mmsh://195.150.20.225/CLASSIC?MP3xt=.asf
+File=http://217.74.72.13:8000/rmf_fm
+Ident=5
+Title=RMF FM
+
+File=http://217.74.72.13:8000/rmf_classic
 Ident=7
-Title17=RMF Classic
-File18=mmsh://195.150.20.225/CLASSICROCK?MP3xt=.asf
-Ident=2
-Title18=RMF Classic Rock
-File19=mmsh://195.150.20.225/CLUB?MP3xt=.asf
-Ident=29
-Title19=RMF Club
-File20=mmsh://195.150.20.225/CLUBBREAKS?MP3xt=.asf
-Ident=50
-Title20=RMF Club Breaks
-File21=mmsh://195.150.20.225/COVER?MP3xt=.asf
-Ident=70
-Title21=RMF Cover
-File22=mmsh://195.150.20.225/CUBA?MP3xt=.asf
-Ident=53
-Title22=RMF Cuba
-File23=mmsh://195.150.20.225/DANCE?MP3xt=.asf
-Ident=3
-Title23=RMF Dance
-File24=mmsh://195.150.20.225/DEPECHEMODE?MP3xt=.asf
-Ident=31
-Title24=RMF Depeche Mode
-File25=mmsh://195.150.20.225/ELECTROSHOCKWAVE?MP3xt=.asf
-Ident=26
-Title25=RMF Electro Shockwave
-File26=mmsh://195.150.20.225/EXTRA?MP3xt=.asf
-Ident=35
-Title26=RMF Extra
-File27=mmsh://195.150.20.225/FM?MP3xt=.asf
-Ident=69
-Title27=RMF FM
-File33=mmsh://195.150.20.225/GOLD?MP3xt=.asf
-Ident=15
-Title33=RMF Gold
-File34=mmsh://195.150.20.225/GROOVE?MP3xt=.asf
-Ident=64
-Title34=RMF Groove
-File35=mmsh://195.150.20.225/GRUNGE?MP3xt=.asf
-Ident=68
-Title35=RMF Grunge
-File36=mmsh://195.150.20.225/HOTNEW?MP3xt=.asf
-Ident=27
-Title36=RMF HOT New
-File37=mmsh://195.150.20.225/HARDANDHEAVY?MP3xt=.asf
-Ident=32
-Title37=RMF Hard & Heavy
-File38=mmsh://195.150.20.225/HIPHOP?MP3xt=.asf
-Ident=37
-Title38=RMF Hip Hop
-File39=mmsh://195.150.20.225/KALINKA?MP3xt=.asf
-Ident=66
-Title39=RMF Kalinka
-File40=mmsh://195.150.20.225/LADYPANK?MP3xt=.asf
-Ident=30
-Title40=RMF Lady Pank
-File41=mmsh://195.150.20.225/LOVE?MP3xt=.asf
-Ident=14
-Title41=RMF Love
-File42=mmsh://195.150.20.225/MJ?MP3xt=.asf
-Ident=58
-Title42=RMF MJ
-File43=mmsh://195.150.20.225/MAXXX?MP3xt=.asf
+Title=RMF Classic
+
+File=http://217.74.72.13:8000/rmf_maxxx
 Ident=6
-Title43=RMF Maxxx
-File44=mmsh://195.150.20.225/HOPBEC?MP3xt=.asf
+Title=RMF Maxxx
+
+File=http://217.74.72.13:8000/rmf_2
+Ident=94
+Title=RMF 2
+
+File=http://217.74.72.13:8000/rmf_3
+Ident=95
+Title=RMF 3
+
+File=http://217.74.72.13:8000/rmf_4
+Ident=96
+Title=RMF 4
+
+File=http://217.74.72.13:8000/rmf_5
+Ident=97
+Title=RMF 5
+
+File=http://217.74.72.13:8000/rmf_elo
+Ident=18
+Title=RMF Elo
+
+File=http://217.74.72.13:8000/rmf_20lat
+Ident=82
+Title=RMF 20 lat
+
+File=http://217.74.72.13:8000/rmf_50s
+Ident=48
+Title=RMF 50s
+
+File=http://217.74.72.13:8000/rmf_60s
+Ident=44
+Title=RMF 60s
+
+File=http://217.74.72.13:8000/rmf_70s
+Ident=45
+Title=RMF 70s
+
+File=http://217.74.72.13:8000/rmf_80s
+Ident=25
+Title=RMF 80s
+
+File=http://217.74.72.13:8000/rmf_90s
+Ident=46
+Title=RMF 90s
+
+File=http://217.74.72.13:8000/rmf_2000
+Ident=81
+Title=RMF 2000
+
+File=http://217.74.72.13:8000/rmf_alternatywa
+Ident=28
+Title=RMF Alternatywa
+
+File=http://217.74.72.13:8000/rmf_audioriver
+Ident=91
+Title=RMF Audioriver
+
+File=http://217.74.72.13:8000/rmf_blues
+Ident=39
+Title=RMF Blues
+
+File=http://217.74.72.13:8000/rmf_beatlemania
+Ident=77
+Title=RMF Beatlemania
+
+File=http://217.74.72.13:8000/rmf_bravo
+Ident=12
+Title=RMF Bravo
+
+File=http://217.74.72.13:8000/rmf_chillout
+Ident=11
+Title=RMF Chillout
+
+File=http://217.74.72.13:8000/rmf_celtic
+Ident=67
+Title=RMF Celtic
+
+File=http://217.74.72.13:8000/rmf_chopin
+Ident=85
+Title=RMF Chopin
+
+File=http://217.74.72.13:8000/rmf_classic_rock
+Ident=2
+Title=RMF Classic Rock
+
+File=http://217.74.72.13:8000/rmf_club
+Ident=29
+Title=RMF Club
+
+File=http://217.74.72.13:8000/rmf_club_breaks
+Ident=50
+Title=RMF Club Breaks
+
+File=http://217.74.72.13:8000/rmf_cover
+Ident=70
+Title=RMF Cover
+
+File=http://217.74.72.13:8000/rmf_cuba
+Ident=53
+Title=RMF Cuba
+
+File=http://217.74.72.13:8000/rmf_dance
+Ident=3
+Title=RMF Dance
+
+File=http://217.74.72.13:8000/rmf_depeche_mode
+Ident=31
+Title=RMF Depeche Mode
+
+File=http://217.74.72.13:8000/rmf_electro_shockwave
+Ident=26
+Title=RMF Electro Shockwave
+
+File=http://217.74.72.13:8000/rmf_extra
+Ident=35
+Title=RMF Extra
+
+File=http://217.74.72.13:8000/rmf_fmf
+Ident=69
+Title=RMF FM fakty
+
+File=http://217.74.72.13:8000/rmf_flamenco
+Ident=56
+Title=RMF Flamenco
+
+File=http://217.74.72.13:8000/rmf_francais
+Ident=54
+Title=RMF Francais
+
+File=http://217.74.72.13:8000/rmf_footbalf
+Ident=90
+Title=RMF Football
+
+File=http://217.74.72.13:8000/rmf_gold
+Ident=15
+Title=RMF Gold
+
+File=http://217.74.72.13:8000/rmf_groove
+Ident=64
+Title=RMF Groove
+
+File=http://217.74.72.13:8000/rmf_grunge
+Ident=68
+Title=RMF Grunge
+
+File=http://217.74.72.13:8000/rmf_hardheavy
+Ident=32
+Title=RMF Hard & Heavy
+
+File=http://217.74.72.13:8000/rmf_hiphop
+Ident=37
+Title=RMF Hip Hop
+
+File=http://217.74.72.13:8000/rmf_hotnew
+Ident=27
+Title=RMF Hot New
+
+File=http://217.74.72.13:8000/rmf_kalinka
+Ident=66
+Title=RMF Kalinka
+
+File=http://217.74.72.13:8000/rmf_ladypank
+Ident=30
+Title=RMF Lady Pank
+
+File=http://217.74.72.13:8000/rmf_love
+Ident=14
+Title=RMF Love
+
+File=http://217.74.72.13:8000/rmf_hopbec
 Ident=22
-Title44=RMF Maxxx Hop-Bêc
-File45=mmsh://195.150.20.225/MICHAELJACKSON?MP3xt=.asf
+Title=RMF Maxx Hop BÄ™c
+
+File=http://217.74.72.13:8000/rmf_jackson
 Ident=73
-Title45=RMF Michael Jackson
-File46=mmsh://195.150.20.225/MUZYKAKLASYCZNA?MP3xt=.asf
-Ident=86
-Title46=RMF Muzyka Klasyczna
-File47=mmsh://195.150.20.225/MUZYKAFILMOWA?MP3xt=.asf
+Title=RMF Michael Jackson
+
+File=http://217.74.72.13:8000/rmf_mj
+Ident=58
+Title=RMF MJ
+
+File=http://217.74.72.13:8000/rmf_filmowa
 Ident=33
-Title47=RMF Muzyka filmowa
-File48=mmsh://195.150.20.225/MUZZO?MP3xt=.asf
+Title=RMF Muzyka Filmowa
+
+File=http://217.74.72.13:8000/rmf_klasyczna
+Ident=86
+Title=RMF Muzyka Klasyczna
+
+File=http://217.74.72.13:8000/rmf_muzzo
 Ident=57
-Title48=RMF Muzzo
-File49=mmsh://195.150.20.225/NIPPON?MP3xt=.asf
+Title=RMF Muzzo
+
+File=http://217.74.72.13:8000/rmf_nippon
 Ident=55
-Title49=RMF Nippon
-File50=mmsh://195.150.20.225/OFFFESTIVAL?MP3xt=.asf
+Title=RMF Nippon
+
+File=http://217.74.72.13:8000/rmf_nostalgia
+Ident=93
+Title=RMF Nostalgia
+
+File=http://217.74.72.13:8000/rmf_off_festival
 Ident=92
-Title50=RMF OFF Festival
-File51=mmsh://195.150.20.225/PNC?MP3xt=.asf
-Ident=59
-Title51=RMF POP & Colors 
-File52=mmsh://195.150.20.225/PRL?MP3xt=.asf
-Ident=38
-Title52=RMF PRL
-File53=mmsh://195.150.20.225/COUNTRY?MP3xt=.asf
+Title=RMF Off Festival
+
+File=http://217.74.72.13:8000/rmf_country
 Ident=74
-Title53=RMF Pacuda Country
-File54=mmsh://195.150.20.225/PARTY?MP3xt=.asf
+Title=RMF Pacuda Country
+
+File=http://217.74.72.13:8000/rmf_party
 Ident=23
-Title54=RMF Party
-File56=mmsh://195.150.20.225/POLSKIROCK?MP3xt=.asf
+Title=RMF Party
+
+File=http://217.74.72.13:8000/rmf_polski_rock
 Ident=36
-Title56=RMF Polski Rock
-File57=mmsh://195.150.20.225/PPRZEBOJE?MP3xt=.asf
+Title=RMF Polski Rock
+
+File=http://217.74.72.13:8000/rmf_polskie_przeboje
 Ident=9
-Title57=RMF Polskie Przeboje
-File58=mmsh://195.150.20.225/POPLISTA?MP3xt=.asf
+Title=RMF Polskie Przeboje
+
+File=http://217.74.72.13:8000/rmf_pop_lista
 Ident=8
-Title58=RMF Poplista
-File60=mmsh://195.150.20.225/PUNK?MP3xt=.asf
+Title=RMF Pop Lista
+
+File=http://217.74.72.13:8000/rmf_pnc
+Ident=59
+Title=RMF Pop & Colors
+
+File=http://217.74.72.13:8000/rmf_prl
+Ident=38
+Title=RMF PRL
+
+File=http://217.74.72.13:8000/rmf_przeboj_roku
+Ident=19
+Title=RMF PrzebÃ³j Roku
+
+File=http://217.74.72.13:8000/rmf_punk
 Ident=83
-Title60=RMF Punk
-File61=mmsh://195.150.20.225/QUEEN?MP3xt=.asf
+Title=RMF Punk
+
+File=http://217.74.72.13:8000/rmf_queen
 Ident=61
-Title61=RMF Queen
-File62=mmsh://195.150.20.225/RNB?MP3xt=.asf
-Ident=4
-Title62=RMF R&B
-File63=mmsh://195.150.20.225/REGGAE?MP3xt=.asf
+Title=RMF Queen
+
+File=http://217.74.72.13:8000/rmf_reggae
 Ident=40
-Title63=RMF Reggae
-File64=mmsh://195.150.20.225/ROCK?MP3xt=.asf
+Title=RMF Reggae
+
+File=http://217.74.72.13:8000/rmf_rnb
+Ident=4
+Title=RMF R&B
+
+File=http://217.74.72.13:8000/rmf_rock
 Ident=1
-Title64=RMF Rock
-File65=mmsh://195.150.20.225/ROCKPROGRESYWNY?MP3xt=.asf
+Title=RMF Rock
+
+File=http://217.74.72.13:8000/rmf_rock_progresywny
 Ident=84
-Title65=RMF Rock Progresywny
-File66=mmsh://195.150.20.225/RUMOR?MP3xt=.asf
+Title=RMF Rock Progresywny
+
+File=http://217.74.72.13:8000/rmf_rumor
 Ident=41
-Title66=RMF Rumor
-File67=mmsh://195.150.20.225/SELECT?MP3xt=.asf
+Title=RMF Rumor
+
+File=http://217.74.72.13:8000/rmf_select
 Ident=42
-Title67=RMF Select
-File68=mmsh://195.150.20.225/SMJAZZ?MP3xt=.asf
-Ident=16
-Title68=RMF Smooth Jazz
-File69=mmsh://195.150.20.225/STYL?MP3xt=.asf
-Ident=79
-Title69=RMF Styl
-File70=mmsh://195.150.20.225/SZANTY?MP3xt=.asf
-Ident=49
-Title70=RMF Szanty
-File71=mmsh://195.150.20.225/SPRZEBOJE?MP3xt=.asf
+Title=RMF Select
+
+File=http://217.74.72.13:8000/rmf_sloneczne_przeboje
 Ident=10
-Title71=RMF S³oneczne Przeboje
-File72=mmsh://195.150.20.225/WMUZYKA?MP3xt=.asf
-Ident=20
-Title72=RMF Wasza Muzyka
-File73=mmsh://195.150.20.225/WORLDMUSIC?MP3xt=.asf
+Title=RMF SÅ‚oneczne Przeboje
+
+File=http://217.74.72.13:8000/rmf_smooth_jazz
+Ident=16
+Title=RMF Smooth Jazz
+
+File=http://217.74.72.13:8000/rmf_styl
+Ident=79
+Title=RMF Styl
+
+File=http://217.74.72.13:8000/rmf_szanty
+Ident=49
+Title=RMF Szanty
+
+File=http://217.74.72.13:8000/rmf_best_of_mm
+Ident=62
+Title=RMF Best Of MM 2010
+
+File=http://217.74.72.13:8000/rmf_world_music
 Ident=87
-Title73=RMF World Music
-File74=mmsh://195.150.20.225/ZIOM?MP3xt=.asf
+Title=RMF World Music
+
+File=http://217.74.72.13:8000/rmf_ziom
 Ident=52
-Title74=RMF Ziom
+Title=RMF Ziom
+
+File=http://217.74.72.13:8000/rmf_wasza_muzyka
+Ident=20
+Title=RMF Wasza Muzyka

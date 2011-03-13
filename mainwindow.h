@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <iostream>
+#include <cstdio>
+#include <cstdlib>
 #include <sstream>
 #include <QStringList>
 #include <QFile>
