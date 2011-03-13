@@ -46,7 +46,7 @@ private:
     Ui::OknoProgramu *ui;
 
     //phonon objects to play music
-    Phonon::MediaObject *mediaObject,*music;
+    Phonon::MediaObject *mediaObject;
     Phonon::AudioOutput *audioOutput;
     Phonon::Path path;
 
@@ -61,7 +61,7 @@ private:
     //variable to check play/stop
     bool isPlay;
 
-    //dataUpdater *data;
+    dataUpdater *data;
     QTimer *timer;
     trackInfo *info;
     list *lis;

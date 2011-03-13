@@ -1,230 +1,203 @@
 [playlist]
 Version=2
-File1=http://files.kusmierz.be/rmf/rmf20lat.mp3
+File1=mmsh://195.150.20.225/20LAT?MP3xt=.asf
 Ident=82
 Title1=20 lat RMF FM
-File2=http://files.kusmierz.be/rmf/rmf2000.mp3
+File2=mmsh://195.150.20.225/2000?MP3xt=.asf
 Ident=81
 Title2=RMF 2000
-File3=http://files.kusmierz.be/rmf/rmf50s.mp3
+File3=mmsh://195.150.20.225/50S?MP3xt=.asf
 Ident=48
 Title3=RMF 50s
-File4=http://files.kusmierz.be/rmf/rmf60s.mp3
+File4=mmsh://195.150.20.225/60S?MP3xt=.asf
 Ident=44
 Title4=RMF 60s
-File5=http://files.kusmierz.be/rmf/rmf70s.mp3
+File5=mmsh://195.150.20.225/70S?MP3xt=.asf
 Ident=45
 Title5=RMF 70s
-File6=http://files.kusmierz.be/rmf/rmf80s.mp3
+File6=mmsh://195.150.20.225/80S?MP3xt=.asf
 Ident=25
 Title6=RMF 80s
-File7=http://files.kusmierz.be/rmf/rmf90s.mp3
+File7=mmsh://195.150.20.225/90S?MP3xt=.asf
 Ident=46
 Title7=RMF 90s
-File8=http://files.kusmierz.be/rmf/rmfalternatywa.mp3
+File8=mmsh://195.150.20.225/ALTERNATYWA?MP3xt=.asf
 Ident=28
 Title8=RMF Alternatywa
-File9=http://files.kusmierz.be/rmf/rmfaudioriver.mp3
+File9=mmsh://195.150.20.225/AUDIORIVER?MP3xt=.asf
 Ident=91
 Title9=RMF Audioriver
-File10=http://files.kusmierz.be/rmf/rmfbaby.mp3
+File10=mmsh://195.150.20.225/BABY?MP3xt=.asf
 Ident=43
 Title10=RMF Baby
-File11=http://files.kusmierz.be/rmf/rmfbeatlemania.mp3
+File11=mmsh://195.150.20.225/BEATLEMANIA?MP3xt=.asf
 Ident=77
 Title11=RMF Beatle Mania
-File12=http://files.kusmierz.be/rmf/rmfblues.mp3
+File12=mmsh://195.150.20.225/BLUES?MP3xt=.asf
 Ident=39
 Title12=RMF Blues
-File13=http://files.kusmierz.be/rmf/rmfbravo.mp3
+File13=mmsh://195.150.20.225/BRAVO?MP3xt=.asf
 Ident=12
 Title13=RMF Bravo
-File14=http://files.kusmierz.be/rmf/rmfceltic.mp3
+File14=mmsh://195.150.20.225/CELTIC?MP3xt=.asf
 Ident=67
 Title14=RMF Celtic
-File15=http://files.kusmierz.be/rmf/rmfchillout.mp3
+File15=mmsh://195.150.20.225/CHILLOUT?MP3xt=.asf
 Ident=11
 Title15=RMF Chillout
-File16=http://files.kusmierz.be/rmf/rmfchopin.mp3
+File16=mmsh://195.150.20.225/CHOPIN?MP3xt=.asf
 Ident=85
 Title16=RMF Chopin
-File17=http://files.kusmierz.be/rmf/rmfclassic.mp3
+File17=mmsh://195.150.20.225/CLASSIC?MP3xt=.asf
 Ident=7
 Title17=RMF Classic
-File18=http://files.kusmierz.be/rmf/rmfclassicrock.mp3
+File18=mmsh://195.150.20.225/CLASSICROCK?MP3xt=.asf
 Ident=2
 Title18=RMF Classic Rock
-File19=http://files.kusmierz.be/rmf/rmfclub.mp3
+File19=mmsh://195.150.20.225/CLUB?MP3xt=.asf
 Ident=29
 Title19=RMF Club
-File20=http://files.kusmierz.be/rmf/rmfclubbreaks.mp3
+File20=mmsh://195.150.20.225/CLUBBREAKS?MP3xt=.asf
 Ident=50
 Title20=RMF Club Breaks
-File21=http://files.kusmierz.be/rmf/rmfcover.mp3
+File21=mmsh://195.150.20.225/COVER?MP3xt=.asf
 Ident=70
 Title21=RMF Cover
-File22=http://files.kusmierz.be/rmf/rmfcuba.mp3
+File22=mmsh://195.150.20.225/CUBA?MP3xt=.asf
 Ident=53
 Title22=RMF Cuba
-File23=http://files.kusmierz.be/rmf/rmfdance.mp3
+File23=mmsh://195.150.20.225/DANCE?MP3xt=.asf
 Ident=3
 Title23=RMF Dance
-File24=http://files.kusmierz.be/rmf/rmfdepechemode.mp3
+File24=mmsh://195.150.20.225/DEPECHEMODE?MP3xt=.asf
 Ident=31
 Title24=RMF Depeche Mode
-File25=http://files.kusmierz.be/rmf/rmfelectroshockwave.mp3
+File25=mmsh://195.150.20.225/ELECTROSHOCKWAVE?MP3xt=.asf
 Ident=26
 Title25=RMF Electro Shockwave
-File26=http://files.kusmierz.be/rmf/rmfextra.mp3
+File26=mmsh://195.150.20.225/EXTRA?MP3xt=.asf
 Ident=35
 Title26=RMF Extra
-File27=http://files.kusmierz.be/rmf/rmffm.mp3
+File27=mmsh://195.150.20.225/FM?MP3xt=.asf
 Ident=69
 Title27=RMF FM
-File28=http://files.kusmierz.be/rmf/rmffmf.mp3
-Ident=33
-Title28=RMF Festiwal Muzyki Filmowej
-File29=http://files.kusmierz.be/rmf/rmfsupport.mp3
-Ident=71
-Title29=RMF Festiwale
-File30=http://files.kusmierz.be/rmf/rmfflamenco.mp3
-Ident=56
-Title30=RMF Flamenco
-File31=http://files.kusmierz.be/rmf/rmffootball.mp3
-Ident=90
-Title31=RMF Football
-File32=http://files.kusmierz.be/rmf/rmffrancais.mp3
-Ident=54
-Title32=RMF Francais
-File33=http://files.kusmierz.be/rmf/rmfgold.mp3
+File33=mmsh://195.150.20.225/GOLD?MP3xt=.asf
 Ident=15
 Title33=RMF Gold
-File34=http://files.kusmierz.be/rmf/rmfgroove.mp3
+File34=mmsh://195.150.20.225/GROOVE?MP3xt=.asf
 Ident=64
 Title34=RMF Groove
-File35=http://files.kusmierz.be/rmf/rmfgrunge.mp3
+File35=mmsh://195.150.20.225/GRUNGE?MP3xt=.asf
 Ident=68
 Title35=RMF Grunge
-File36=http://files.kusmierz.be/rmf/rmfhotnew.mp3
+File36=mmsh://195.150.20.225/HOTNEW?MP3xt=.asf
 Ident=27
 Title36=RMF HOT New
-File37=http://files.kusmierz.be/rmf/rmfhardandheavy.mp3
+File37=mmsh://195.150.20.225/HARDANDHEAVY?MP3xt=.asf
 Ident=32
 Title37=RMF Hard & Heavy
-File38=http://files.kusmierz.be/rmf/rmfhiphop.mp3
+File38=mmsh://195.150.20.225/HIPHOP?MP3xt=.asf
 Ident=37
 Title38=RMF Hip Hop
-File39=http://files.kusmierz.be/rmf/rmfkalinka.mp3
+File39=mmsh://195.150.20.225/KALINKA?MP3xt=.asf
 Ident=66
 Title39=RMF Kalinka
-File40=http://files.kusmierz.be/rmf/rmfladypank.mp3
+File40=mmsh://195.150.20.225/LADYPANK?MP3xt=.asf
 Ident=30
 Title40=RMF Lady Pank
-File41=http://files.kusmierz.be/rmf/rmflove.mp3
+File41=mmsh://195.150.20.225/LOVE?MP3xt=.asf
 Ident=14
 Title41=RMF Love
-File42=http://files.kusmierz.be/rmf/rmfmj.mp3
+File42=mmsh://195.150.20.225/MJ?MP3xt=.asf
 Ident=58
 Title42=RMF MJ
-File43=http://files.kusmierz.be/rmf/rmfmaxxx.mp3
+File43=mmsh://195.150.20.225/MAXXX?MP3xt=.asf
 Ident=6
 Title43=RMF Maxxx
-File44=http://files.kusmierz.be/rmf/rmfhopbec.mp3
+File44=mmsh://195.150.20.225/HOPBEC?MP3xt=.asf
 Ident=22
 Title44=RMF Maxxx Hop-Bêc
-File45=http://files.kusmierz.be/rmf/rmfmichaeljackson.mp3
+File45=mmsh://195.150.20.225/MICHAELJACKSON?MP3xt=.asf
 Ident=73
 Title45=RMF Michael Jackson
-File46=http://files.kusmierz.be/rmf/rmfmuzykaklasyczna.mp3
+File46=mmsh://195.150.20.225/MUZYKAKLASYCZNA?MP3xt=.asf
 Ident=86
 Title46=RMF Muzyka Klasyczna
-File47=http://files.kusmierz.be/rmf/rmffilmowa.mp3
+File47=mmsh://195.150.20.225/MUZYKAFILMOWA?MP3xt=.asf
 Ident=33
 Title47=RMF Muzyka filmowa
-File48=http://files.kusmierz.be/rmf/rmfmuzzo.mp3
+File48=mmsh://195.150.20.225/MUZZO?MP3xt=.asf
 Ident=57
 Title48=RMF Muzzo
-File49=http://files.kusmierz.be/rmf/rmfnippon.mp3
+File49=mmsh://195.150.20.225/NIPPON?MP3xt=.asf
 Ident=55
 Title49=RMF Nippon
-File50=http://files.kusmierz.be/rmf/rmfofffestival.mp3
+File50=mmsh://195.150.20.225/OFFFESTIVAL?MP3xt=.asf
 Ident=92
 Title50=RMF OFF Festival
-File51=http://files.kusmierz.be/rmf/rmfpnc.mp3
+File51=mmsh://195.150.20.225/PNC?MP3xt=.asf
 Ident=59
 Title51=RMF POP & Colors 
-File52=http://files.kusmierz.be/rmf/rmfprl.mp3
+File52=mmsh://195.150.20.225/PRL?MP3xt=.asf
 Ident=38
 Title52=RMF PRL
-File53=http://files.kusmierz.be/rmf/rmfcountry.mp3
+File53=mmsh://195.150.20.225/COUNTRY?MP3xt=.asf
 Ident=74
 Title53=RMF Pacuda Country
-File54=http://files.kusmierz.be/rmf/rmfparty.mp3
+File54=mmsh://195.150.20.225/PARTY?MP3xt=.asf
 Ident=23
 Title54=RMF Party
-File55=http://files.kusmierz.be/rmf/rmfpiosenkaliteracka.mp3
-Ident=65
-Title55=RMF Piosenka Literacka
-File56=http://files.kusmierz.be/rmf/rmfpolskirock.mp3
+File56=mmsh://195.150.20.225/POLSKIROCK?MP3xt=.asf
 Ident=36
 Title56=RMF Polski Rock
-File57=http://files.kusmierz.be/rmf/rmfpprzeboje.mp3
+File57=mmsh://195.150.20.225/PPRZEBOJE?MP3xt=.asf
 Ident=9
 Title57=RMF Polskie Przeboje
-File58=http://files.kusmierz.be/rmf/rmfpoplista.mp3
+File58=mmsh://195.150.20.225/POPLISTA?MP3xt=.asf
 Ident=8
 Title58=RMF Poplista
-File59=http://files.kusmierz.be/rmf/rmfplata.mp3
-Ident=?
-Title59=RMF Przebój lata
-File60=http://files.kusmierz.be/rmf/rmfpunk.mp3
+File60=mmsh://195.150.20.225/PUNK?MP3xt=.asf
 Ident=83
 Title60=RMF Punk
-File61=http://files.kusmierz.be/rmf/rmfqueen.mp3
+File61=mmsh://195.150.20.225/QUEEN?MP3xt=.asf
 Ident=61
 Title61=RMF Queen
-File62=http://files.kusmierz.be/rmf/rmfrnb.mp3
+File62=mmsh://195.150.20.225/RNB?MP3xt=.asf
 Ident=4
 Title62=RMF R&B
-File63=http://files.kusmierz.be/rmf/rmfreggae.mp3
+File63=mmsh://195.150.20.225/REGGAE?MP3xt=.asf
 Ident=40
 Title63=RMF Reggae
-File64=http://files.kusmierz.be/rmf/rmfrock.mp3
+File64=mmsh://195.150.20.225/ROCK?MP3xt=.asf
 Ident=1
 Title64=RMF Rock
-File65=http://files.kusmierz.be/rmf/rmfrockprogresywny.mp3
+File65=mmsh://195.150.20.225/ROCKPROGRESYWNY?MP3xt=.asf
 Ident=84
 Title65=RMF Rock Progresywny
-File66=http://files.kusmierz.be/rmf/rmfrumor.mp3
+File66=mmsh://195.150.20.225/RUMOR?MP3xt=.asf
 Ident=41
 Title66=RMF Rumor
-File67=http://files.kusmierz.be/rmf/rmfselect.mp3
+File67=mmsh://195.150.20.225/SELECT?MP3xt=.asf
 Ident=42
 Title67=RMF Select
-File68=http://files.kusmierz.be/rmf/rmfsmjazz.mp3
+File68=mmsh://195.150.20.225/SMJAZZ?MP3xt=.asf
 Ident=16
 Title68=RMF Smooth Jazz
-File69=http://files.kusmierz.be/rmf/rmfstyl.mp3
+File69=mmsh://195.150.20.225/STYL?MP3xt=.asf
 Ident=79
 Title69=RMF Styl
-File70=http://files.kusmierz.be/rmf/rmfszanty.mp3
+File70=mmsh://195.150.20.225/SZANTY?MP3xt=.asf
 Ident=49
 Title70=RMF Szanty
-File71=http://files.kusmierz.be/rmf/rmfsprzeboje.mp3
+File71=mmsh://195.150.20.225/SPRZEBOJE?MP3xt=.asf
 Ident=10
 Title71=RMF S³oneczne Przeboje
-File72=http://files.kusmierz.be/rmf/rmfwmuzyka.mp3
+File72=mmsh://195.150.20.225/WMUZYKA?MP3xt=.asf
 Ident=20
 Title72=RMF Wasza Muzyka
-File73=http://files.kusmierz.be/rmf/rmfworldmusic.mp3
+File73=mmsh://195.150.20.225/WORLDMUSIC?MP3xt=.asf
 Ident=87
 Title73=RMF World Music
-File74=http://files.kusmierz.be/rmf/rmfziom.mp3
+File74=mmsh://195.150.20.225/ZIOM?MP3xt=.asf
 Ident=52
 Title74=RMF Ziom
-File75=http://files.kusmierz.be/rmf/rmfswieta.mp3
-Ident=17
-Title75=RMF ¦wiêta
-File76=http://files.kusmierz.be/rmf/rmfelo.mp3
-Ident=18
-Title76=eLO RMF

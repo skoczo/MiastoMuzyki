@@ -48,8 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setStyleSheet("QMainWindow { background-color: #182838; }");
 
     //ui->listWidget->setStyleSheet("QWidget {background-color: #182838;}");
-
     mediaObject = new Phonon::MediaObject(this);
+
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
     audioOutput->setVolume((qreal)1.0);
 
@@ -115,7 +115,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listWidget->setCurrentRow(0);
 
     //wait for new song
-    //data=new dataUpdater(mediaObject);
+    data=new dataUpdater(mediaObject);
 
     //progress bar
     progressBar=new QProgressBar(ui->statusBar);
@@ -124,8 +124,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->statusBar->addWidget(progressBar);
 
     progressBar->setRange(0, 100);
-    //connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar, SLOT(setValue(int)));
-    connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
+    connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar, SLOT(setValue(int)));
+    //connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
 
     //set volume widget
     ui->volume->setRange(0,100);
@@ -133,8 +133,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->volume,SIGNAL(valueChanged(int)),this,SLOT(setVolume(int)));
 
     //if new song
-    //connect(data,SIGNAL(newSong()),this,SLOT(newSong()));
-    connect(mediaObject,SIGNAL(metaDataChanged()),this,SLOT(newSong()));
+    connect(data,SIGNAL(newSong()),this,SLOT(newSong()));
+    //connect(mediaObject,SIGNAL(metaDataChanged()),this,SLOT(newSong()));
     //if track info emit e_dane run aktualizacja function
     connect(info,SIGNAL(dataReady()),this,SLOT(update()));
     //this function load actual track image to label
@@ -146,11 +146,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->play_pause,SIGNAL(clicked()),this,SLOT(play_pause()));
 
     //timer
-    //timer=new QTimer(this);
+    timer=new QTimer(this);
     //timer run update function
-    //connect(timer,SIGNAL(timeout()),data,SLOT(update()));
+    connect(timer,SIGNAL(timeout()),data,SLOT(update()));
     //run this function every 1 second
-    //timer->start(1000);
+    timer->start(1000);
 }
 
 void MainWindow::setVolume(int i)
@@ -165,6 +165,7 @@ void MainWindow::test(int i)
     ss << i;
     qDebug("test buffer: ");
     qDebug(ss.str().c_str());
+    progressBar->setValue(i);
 }
 
 /*proxy setup function*/
@@ -375,7 +376,8 @@ void MainWindow::play_pause()
         actualStation=ui->listWidget->item(row)->text();
         qDebug(("Station name: "+ui->listWidget->item(row)->text()).toAscii()+"\n");
         qDebug(("Station url: "+(*stations)[actualStation]+"\n").toAscii());
-        mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
+        //mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
+        mediaObject->setCurrentSource(Phonon::MediaSource((*stations)[actualStation]));
         mediaObject->play();
         info->show(actualStation);
         ui->play_pause->setText("Stop");
