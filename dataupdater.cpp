@@ -23,7 +23,7 @@ void dataUpdater::update()
     tmp=media->metaData(Phonon::ArtistMetaData);
 
     //check is tmp have any data
-    if(tmp.size()>0&&lastArt!=tmp[0])
+    if(tmp.size()>0&&lastArt.compare(tmp[0]))
     {
         lastArt=tmp[0];
         aktualizacja=true;
@@ -33,7 +33,7 @@ void dataUpdater::update()
     tmp=media->metaData(Phonon::TitleMetaData);
 
     //check is tmp have any data
-    if(tmp.size()>0&&lastTitle!=tmp[0])
+    if(tmp.size()>0&&lastTitle.compare(tmp[0]))
     {
         lastTitle=tmp[0];
         aktualizacja=true;

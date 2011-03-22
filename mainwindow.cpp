@@ -125,7 +125,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     progressBar->setRange(0, 100);
     connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar, SLOT(setValue(int)));
-    //connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
 
     //set volume widget
     ui->volume->setRange(0,100);
@@ -133,8 +132,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->volume,SIGNAL(valueChanged(int)),this,SLOT(setVolume(int)));
 
     //if new song
-    connect(data,SIGNAL(newSong()),this,SLOT(newSong()));
-    //connect(mediaObject,SIGNAL(metaDataChanged()),this,SLOT(newSong()));
+    //connect(data,SIGNAL(newSong()),this,SLOT(newSong()));
+    connect(mediaObject,SIGNAL(metaDataChanged()),this,SLOT(newSong()));
     //if track info emit e_dane run aktualizacja function
     connect(info,SIGNAL(dataReady()),this,SLOT(update()));
     //this function load actual track image to label
@@ -146,11 +145,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->play_pause,SIGNAL(clicked()),this,SLOT(play_pause()));
 
     //timer
-    timer=new QTimer(this);
+    //timer=new QTimer(this);
     //timer run update function
-    connect(timer,SIGNAL(timeout()),data,SLOT(update()));
+    //connect(timer,SIGNAL(timeout()),data,SLOT(update()));
     //run this function every 1 second
-    timer->start(1000);
+    //timer->start(1000);
 }
 
 void MainWindow::setVolume(int i)
@@ -313,6 +312,7 @@ void MainWindow::imageNext(QPixmap *p)
  */
 void MainWindow::newSong()
 {
+    qDebug("New song");
 //    info->show(ui->listWidget->item(ui->listWidget->currentRow())->text());
     if(actualStation.length()>0)
         info->show(actualStation);
@@ -338,7 +338,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*
+/**
 play clicked station
  */
 void MainWindow::on_listWidget_doubleClicked(QModelIndex index)
