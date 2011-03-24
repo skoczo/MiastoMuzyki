@@ -244,7 +244,7 @@ Title=RMF PRL
 
 File=http://217.74.72.13:8000/rmf_przeboj_roku
 Ident=19
-Title=RMF Przebój Roku
+Title=RMF Przeboj Roku
 
 File=http://217.74.72.13:8000/rmf_punk
 Ident=83
@@ -280,7 +280,7 @@ Title=RMF Select
 
 File=http://217.74.72.13:8000/rmf_sloneczne_przeboje
 Ident=10
-Title=RMF Słoneczne Przeboje
+Title=RMF Sloneczne Przeboje
 
 File=http://217.74.72.13:8000/rmf_smooth_jazz
 Ident=16

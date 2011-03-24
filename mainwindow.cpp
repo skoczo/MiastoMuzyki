@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mediaObject = new Phonon::MediaObject(this);
 
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
-    audioOutput->setVolume((qreal)1.0);
+    //audioOutput->setVolume((qreal)1.0);
 
     if(mediaObject==NULL||mediaObject->errorType()!=0||audioOutput==NULL)
     {
