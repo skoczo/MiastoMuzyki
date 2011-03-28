@@ -29,15 +29,6 @@ void Parser::start()
 
     char *c=new char;
 
-    //for(int i=0;i<2;i++)
-    //{
-    //    while(plik.getChar(c))
-    //    {
-    //        if(*c=='\n')
-    //            break;
-    //    }
-    //}
-
     //variable for remember file name
     QString file,ident;
 
@@ -123,7 +114,6 @@ void Parser::start()
                         break;
                 }
 
-                //qDebug(("file "+tmp).toAscii());
                 //remember result
                 ident=tmp;
             }

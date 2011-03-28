@@ -11,8 +11,8 @@ trackInfo::trackInfo(QMap<QString,QString> *info,list *l)
 }
 
 /*
- get file with play list
- */
+get file with play list
+*/
 void trackInfo::show(QString station)
 {
     //QString num=(*info)[station];
@@ -20,20 +20,37 @@ void trackInfo::show(QString station)
     access->get(QNetworkRequest("http://www.miastomuzyki.pl/stacje/stacje_gramy_"+(*info)[station]+".txt"));
 }
 
+void trackInfo::clean()
+{
+	l->actual.artist = "";
+	l->actual.disk = "";
+	l->actual.idp = "";
+	l->actual.title = "";
+	l->actual.year = "";
+
+	l->next.artist="";
+	l->next.disk="";
+	l->next.idp="";
+	l->next.title="";
+	l->next.year="";
+}
+
 /*
- if file dowloaded
- start get info from it
- */
+if file dowloaded
+start get info from it
+*/
 void trackInfo::finished(QNetworkReply *reply)
 {
     if(reply->error()!=0)
     {
-        qDebug(("error while load track info\ntrackInfo::finished\n "+QString::number(reply->error())).toAscii());
-        qDebug(reply->url().toString().toAscii());
+        qDebug()<<("error while load track info\ntrackInfo::finished\n "+QString::number(reply->error())).toAscii();
+        qDebug()<<reply->url().toString().toAscii();
         l=NULL;
     }
     else
     {
+    	clean();
+
         utwor *u=NULL;
         QString dane(reply->readAll());
 
@@ -72,11 +89,11 @@ void trackInfo::finished(QNetworkReply *reply)
 
                 if(tmp=="teraz")
                 {
-                    u=&l->aktualny;
+                    u=&l->actual;
                 }
                 else if(tmp=="pozniej")
                 {
-                    u=&l->nastepny;
+                    u=&l->next;
                 }
                 else if(tmp=="idp")
                 {
@@ -91,7 +108,7 @@ void trackInfo::finished(QNetworkReply *reply)
                     if(u!=NULL)
                     {
                         szukanie(tmp,i,dane,petla);
-                        u->wykonawca=tmp;
+                        u->artist=tmp;
                     }
                 }
                 else if(tmp=="tyt")
@@ -99,7 +116,7 @@ void trackInfo::finished(QNetworkReply *reply)
                     if(u!=NULL)
                     {
                         szukanie(tmp,i,dane,petla);
-                        u->tytul=tmp;
+                        u->title=tmp;
                     }
                 }
                 else if(tmp=="ply")
@@ -107,7 +124,7 @@ void trackInfo::finished(QNetworkReply *reply)
                     if(u!=NULL)
                     {
                         szukanie(tmp,i,dane,petla);
-                        u->plyta=tmp;
+                        u->disk=tmp;
                     }
                 }
                 else if(tmp=="rok")
@@ -115,14 +132,14 @@ void trackInfo::finished(QNetworkReply *reply)
                     if(u!=NULL)
                     {
                         szukanie(tmp,i,dane,petla);
-                        u->rok=tmp;
+                        u->year=tmp;
                     }
                 }
             }
         }
         qDebug("player list file parsed succeed\n");
-        qDebug(("\nidp: "+l->aktualny.idp+" plyta:"+l->aktualny.plyta+" rok:"+l->aktualny.rok+" tytul:"+l->aktualny.tytul+" wykonawca:"+l->aktualny.wykonawca).toAscii());
-        qDebug(("\nidp: "+l->nastepny.idp+" plyta:"+l->nastepny.plyta+" rok:"+l->nastepny.rok+" tytul:"+l->nastepny.tytul+" wykonawca:"+l->nastepny.wykonawca).toAscii());
+        qDebug()<<("\nidp: "+l->actual.idp+" plyta:"+l->actual.disk+" rok:"+l->actual.year+" tytul:"+l->actual.title+" wykonawca:"+l->actual.artist).toAscii();
+        qDebug()<<("\nidp: "+l->next.idp+" plyta:"+l->next.disk+" rok:"+l->next.year+" tytul:"+l->next.title+" wykonawca:"+l->next.artist).toAscii();
 
         emit dataReady();
     }
@@ -131,7 +148,7 @@ void trackInfo::finished(QNetworkReply *reply)
 /*
 this funtion get value
 and write it to tmp variable
- */
+*/
 void szukanie(QString &tmp,int &i,QString &dane,bool &petla)
 {
     tmp="";

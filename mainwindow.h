@@ -6,11 +6,13 @@
 #include <cstdlib>
 #include <sstream>
 #include <QStringList>
+#include <QWaitCondition>
 #include <QFile>
 #include <QPicture>
 #include <QMainWindow>
 #include <QListWidget>
 #include <QtWebKit/QWebView>
+#include <QThread>
 #include <QUrl>
 #include <QMap>
 #include <QMapIterator>
@@ -23,11 +25,11 @@
 #include <BackendCapabilities>
 #include <QProgressBar>
 #include "parser.h"
-#include "dataupdater.h"
 #include "trackinfo.h"
 #include "lista.h"
 #include "imageload.h"
 #include "proxydialog.h"
+#include "loader.h"
 
 namespace Ui {
     class MainWindow;
@@ -40,12 +42,15 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    void setLoader(loader &l);
     ~MainWindow();
 
 private:
     //window ui
     //Ui::MainWindow *ui;
     Ui::OknoProgramu *ui;
+
+    loader *l;
 
     //phonon objects to play music
     Phonon::MediaObject *mediaObject;
@@ -63,7 +68,6 @@ private:
     //variable to check play/stop
     bool isPlay;
 
-    dataUpdater *data;
     QTimer *timer;
     trackInfo *info;
     list *lis;
@@ -82,7 +86,7 @@ private:
 private slots:
     void on_actionUstawienia_triggered();
     void on_listWidget_doubleClicked(QModelIndex index);
-    void newSong();
+    void checkPlayList();
     void update();
     void image(QPixmap *p);
     void imageNext(QPixmap *p);
@@ -90,6 +94,9 @@ private slots:
     void test(int i);
     void setVolume(int);
     void play_pause();
+
+   signals:
+    void closeLoader();
 };
 
 #endif // MAINWINDOW_H

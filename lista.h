@@ -5,16 +5,16 @@
 
 struct utwor{
     QString idp;
-    QString wykonawca;
-    QString tytul;
-    QString plyta;
-    QString rok;
+    QString artist;
+    QString title;
+    QString disk;
+    QString year;
 };
 
 struct list
 {
-    utwor aktualny;
-    utwor nastepny;
+    utwor actual;
+    utwor next;
 };
 
 

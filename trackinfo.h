@@ -1,5 +1,6 @@
 #ifndef TRACKINFO_H
 #define TRACKINFO_H
+
 #include <QObject>
 #include <QMap>
 #include <QUrl>
@@ -8,6 +9,7 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
+#include <QDebug>
 #include <iostream>
 #include "lista.h"
 
@@ -22,6 +24,9 @@ private:
 public:
     trackInfo(QMap<QString,QString> *info,list *l);
 
+private:
+    void clean();
+
 public slots:
     void finished(QNetworkReply* reply);
     void show(QString station);
@@ -32,3 +37,4 @@ signals:
 
 void szukanie(QString &tmp,int &i,QString &dane,bool &petla);
 #endif // TRACKINFO_H
+
