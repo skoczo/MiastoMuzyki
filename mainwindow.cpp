@@ -135,13 +135,25 @@ MainWindow::MainWindow(QWidget *parent) :
 	//ui->statusBar->addWidget(progressBar);
 
 	progressBar->setRange(0, 100);
-	connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar,
-			SLOT(setValue(int)));
+	//connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar,
+	//		SLOT(setValue(int)));
+
+	connect(mediaObject, SIGNAL(bufferStatus(int)), this,
+				SLOT(test(int)));
 
 	//set volume widget
-	ui->volume->setRange(0, 100);
-	ui->volume->setValue(100);
-	connect(ui->volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
+	//hide old volume vidget
+	ui->volume->setVisible(false);
+
+	//new volume widget which set volume to clicked
+	FastSlider * volume = new FastSlider(this);
+
+	volume->setRange(0, 100);
+	volume->setValue(100);
+	volume->setOrientation(Qt::Horizontal);
+	ui->horizontalLayout_5->addWidget(volume);
+
+	connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
 
 	//if track info emit e_dane run update function
 	connect(info, SIGNAL(dataReady()), this, SLOT(update()));
@@ -168,7 +180,7 @@ void MainWindow::setLoader(loader &l) {
 }
 
 void MainWindow::setVolume(int i) {
-	audioOutput->setVolume((qreal) i / 100.0);
+	audioOutput->setVolume((qreal) i / 100.f);
 }
 
 //test slot
@@ -391,7 +403,7 @@ void MainWindow::play_pause() {
 		qDebug() << "Station url: " + (*stations)[actualStation] + "\n";
 		//mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
 		mediaObject->setCurrentSource(
-				Phonon::MediaSource((*stations)[actualStation]));
+				Phonon::MediaSource(QUrl((*stations)[actualStation])));
 		mediaObject->play();
 		info->show(actualStation);
 		ui->play_pause->setText("Stop");
@@ -407,3 +419,5 @@ void MainWindow::play_pause() {
 void MainWindow::on_actionUstawienia_triggered() {
 	proxyDial->show();
 }
+
+

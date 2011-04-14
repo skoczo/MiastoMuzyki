@@ -278,6 +278,9 @@
           </item>
           <item>
            <widget class="QSlider" name="volume">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
