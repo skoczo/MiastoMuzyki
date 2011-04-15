@@ -25,32 +25,31 @@
 #include <BackendCapabilities>
 #include <QProgressBar>
 #include <QMouseEvent>
+#include <QMessageBox>
 #include "parser.h"
 #include "trackinfo.h"
 #include "lista.h"
 #include "imageload.h"
 #include "proxydialog.h"
-#include "loader.h"
 
 namespace Ui {
 class MainWindow;
 class OknoProgramu;
 }
+//program version
+static QString version="0.4";
 
 class MainWindow: public QMainWindow {
 Q_OBJECT
 
 public:
 	explicit MainWindow(QWidget *parent = 0);
-	void setLoader(loader &l);
 	~MainWindow();
 
 private:
 	//window ui
 	//Ui::MainWindow *ui;
 	Ui::OknoProgramu *ui;
-
-	loader *l;
 
 	//phonon objects to play music
 	Phonon::MediaObject *mediaObject;
@@ -82,6 +81,7 @@ private:
 	QProgressBar *progressBar;
 
 	void loadDataToList();
+	void hideShow(QWidget*,QWidget*,int);
 
 private slots:
 	void on_actionUstawienia_triggered();
@@ -94,9 +94,7 @@ private slots:
 	void test(int i);
 	void setVolume(int);
 	void play_pause();
-
-signals:
-	void closeLoader();
+	void about();
 };
 
 class FastSlider: public QSlider {

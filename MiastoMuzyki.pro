@@ -13,18 +13,14 @@ SOURCES += main.cpp \
     trackinfo.cpp \
     parser.cpp \
     imageload.cpp \
-    loader.cpp \
     proxydialog.cpp
 HEADERS += mainwindow.h \
-	trackinfo.h \
+    trackinfo.h \
     parser.h \
     lista.h \
     imageload.h \
-    loader.h \
     proxydialog.h
-FORMS += mainwindow.ui \
-    oknoprogramu.ui \
-    loader.ui \
+FORMS += oknoprogramu.ui \
     proxyDialog.ui
 RESOURCES += resources.qrc
 win32 { 

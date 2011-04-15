@@ -1,10 +1,8 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "ui_oknoprogramu.h"
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	//ui(new Ui::MainWindow)
 			ui(new Ui::OknoProgramu) {
 	isPlay = false;
 
@@ -131,12 +129,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	//progress bar
 	progressBar = new QProgressBar(ui->statusBar);
 
-	//ui->statusBar->addWidget(new QLabel("Bufor: "));
-	//ui->statusBar->addWidget(progressBar);
-
+	//hide progress bar because it does`t work
+	progressBar->setVisible(false);
 	progressBar->setRange(0, 100);
-	//connect(mediaObject, SIGNAL(bufferStatus(int)), progressBar,
-	//		SLOT(setValue(int)));
 
 	connect(mediaObject, SIGNAL(bufferStatus(int)), this,
 				SLOT(test(int)));
@@ -162,8 +157,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	//this function load next track image to label
 	connect(loadNext, SIGNAL(image(QPixmap*)), this, SLOT(imageNext(QPixmap*)));
 	//proxy setup
-	//connect(proxyDial,SIGNAL(data_ok(QNetworkProxy)),this,SLOT(setProxy(QNetworkProxy)));
+	connect(proxyDial,SIGNAL(data_ok(QNetworkProxy)),this,SLOT(setProxy(QNetworkProxy)));
 	connect(ui->play_pause, SIGNAL(clicked()), this, SLOT(play_pause()));
+
+	connect(ui->actionO_programie, SIGNAL(triggered()), this, SLOT(about()));
 
 	//timer
 	timer = new QTimer(this);
@@ -172,15 +169,26 @@ MainWindow::MainWindow(QWidget *parent) :
 	//run this function every 5 second
 	timer->start(5000);
 
-	audioOutput->setVolume((qreal) 100 / 100.0);
-}
-
-void MainWindow::setLoader(loader &l) {
-	this->l = &l;
+	audioOutput->setVolume((qreal)1);
 }
 
 void MainWindow::setVolume(int i) {
 	audioOutput->setVolume((qreal) i / 100.f);
+}
+
+void MainWindow::about()
+{
+	QMessageBox::about(this
+			,tr("Informacje o programie")
+			,tr("<center>"
+			"Autor: Adrian Skoczylas<br><br>"
+			"Program do słuchania stacji MiastaMuzyki<br><br>"
+			"Wersja: "+version.toAscii()+"<br><br>"
+			"Nowe wersje programu można ściągnąć ze strony: http://sourceforge.net/projects/miastomuzyki/<br><br>"
+			"Na powyższej stronie można również dokonać dotacji na projekt<br><br>"
+			"Program udostępniony jest na wolnej licencji. Jego kod można ściągnąć ze strony:<br>"
+			"http://github.com/skoczo/MiastoMuzyki"
+			"</center>"));
 }
 
 //test slot
@@ -201,40 +209,85 @@ void MainWindow::setProxy(QNetworkProxy p) {
 	qDebug("Proxy setup");
 }
 
+void MainWindow::hideShow(QWidget *w,QWidget *w2,int size)
+{
+	if(size==0)
+	{
+		if(w->isVisible())
+			w->setVisible(false);
+
+		if(w2->isVisible())
+			w2->setVisible(false);
+	}
+	else
+	{
+		if(!w->isVisible())
+			w->setVisible(true);
+
+		if(!w2->isVisible())
+			w2->setVisible(true);
+	}
+}
+
 /*this function update information about
  track in window. Load title and others information
  and cd picture
  */
 void MainWindow::update() {
 	if (lis != NULL) {
+		int size=0;
+
 		//load txt data
 		ui->TerazPlyta->setText(
 				"<font color=yellow>" + stringChange(lis->actual.disk)
 						+ "</font>");
+		size=lis->actual.disk.length();
+		hideShow(ui->plyta, ui->TerazPlyta, size);
+
 		ui->TerazRok->setText(
 				"<font color=yellow>" + stringChange(lis->actual.year)
 						+ "</font>");
+		size=lis->actual.year.length();
+		hideShow(ui->rok, ui->TerazRok, size);
+
 		ui->TerazTytul->setText(
 				"<font color=yellow>" + stringChange(lis->actual.title)
 						+ "</font>");
+		size=lis->actual.title.length();
+		hideShow(ui->tytul, ui->TerazTytul, size);
+
 		ui->TerazWykonawca->setText(
 				"<font color=yellow>" + stringChange(lis->actual.artist)
 						+ "</font>");
+		size=lis->actual.artist.length();
+		hideShow(ui->wykonawca, ui->TerazWykonawca, size);
+
 
 		ui->NastepnaWykonawca->setText(
 				"<font color=yellow>" + stringChange(lis->next.artist)
 						+ "</font>");
+		size=lis->next.artist.length();
+		hideShow(ui->label_2 ,ui->NastepnaWykonawca , size);
+
 		ui->NastepnaPlyta->setText(
 				"<font color=yellow>" + stringChange(lis->next.disk)
 						+ "</font>");
+		size=lis->next.disk.length();
+		hideShow(ui->label_3 ,ui->NastepnaPlyta , size);
+
 		ui->NastepnaRok->setText(
 				"<font color=yellow>" + stringChange(lis->next.year)
 						+ "</font>");
+		size=lis->next.year.length();
+		hideShow(ui->label_4 ,ui->NastepnaRok ,size);
+
 		ui->NastepnaTytul->setText(
 				"<font color=yellow>" + stringChange(lis->next.title)
 						+ "</font>");
+		size=lis->next.title.length();
+		hideShow(ui->label_5 ,ui->NastepnaTytul ,size);
 
-		//this if`s loads played track picture
+		//this loads played track picture
 		//url picture depends aktualny->ipd length
 		if (lis->actual.idp.length() > 4) {
 			load->load(
@@ -257,13 +310,16 @@ void MainWindow::update() {
 						"http://doc.rmf.pl/media/img_muzyka/plyta/0/"
 								+ lis->actual.idp + ".jpg");
 			else
-				image(new QPixmap(":/brak.jpg"));
+			{
+				//image(new QPixmap(":/brak.jpg"));
+				image(NULL);
+			}
 
 			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/0/"
 					+ lis->actual.idp + ".jpg");
 		}
 
-		//this if`s do that same but to next song
+		//this do that same but for the next song
 		if (lis->next.idp.length() > 4) {
 			loadNext->load(
 					"http://doc.rmf.pl/media/img_muzyka/plyta/"
@@ -285,7 +341,10 @@ void MainWindow::update() {
 						"http://doc.rmf.pl/media/img_muzyka/plyta/0/"
 								+ lis->next.idp + ".jpg");
 			else
-				imageNext(new QPixmap(":/brak.jpg"));
+			{
+				//imageNext(new QPixmap(":/brak.jpg"));
+				image(NULL);
+			}
 
 			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/0/"
 					+ lis->next.idp + ".jpg");
@@ -320,11 +379,15 @@ QString MainWindow::stringChange(QString s) {
  */
 void MainWindow::image(QPixmap *p) {
 	if (p != NULL) {
+		if(!ui->Okladka->isVisible())
+			ui->Okladka->setVisible(true);
+
 		ui->Okladka->setPixmap(*p);
 		ui->Okladka->adjustSize();
 	} else {
-		ui->Okladka->setPixmap(QPixmap(":/brak.jpg"));
-		ui->Okladka->adjustSize();
+		ui->Okladka->setVisible(false);
+		//ui->Okladka->setPixmap(QPixmap(":/brak.jpg"));
+		//ui->Okladka->adjustSize();
 	}
 
 	this->adjustSize();
@@ -335,6 +398,9 @@ void MainWindow::image(QPixmap *p) {
  */
 void MainWindow::imageNext(QPixmap *p) {
 	if (p != NULL) {
+		if(!ui->NastepnaOkladka->isVisible())
+					ui->NastepnaOkladka->setVisible(true);
+
 		ui->NastepnaOkladka->setPixmap(*p);
 		ui->NastepnaOkladka->adjustSize();
 	} else {
@@ -401,7 +467,6 @@ void MainWindow::play_pause() {
 		actualStation = ui->listWidget->item(row)->text();
 		qDebug() << "Station name: " + ui->listWidget->item(row)->text() + "\n";
 		qDebug() << "Station url: " + (*stations)[actualStation] + "\n";
-		//mediaObject->setCurrentSource(QUrl((*stations)[actualStation]));
 		mediaObject->setCurrentSource(
 				Phonon::MediaSource(QUrl((*stations)[actualStation])));
 		mediaObject->play();
@@ -417,6 +482,10 @@ void MainWindow::play_pause() {
 }
 
 void MainWindow::on_actionUstawienia_triggered() {
+	QMessageBox::information(this,tr("Nie przetestowane")
+			,tr("Nie testowałem tej opcji.<br>"
+					"Jeśli działa lub nie to proszę dać znać na<br>"
+					"stronie programu."));
 	proxyDial->show();
 }
 

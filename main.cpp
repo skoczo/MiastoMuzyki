@@ -1,7 +1,6 @@
 #include <QtGui/QApplication>
 #include <QTextCodec>
 #include "mainwindow.h"
-#include "loader.h"
 
 int main(int argc, char *argv[])
 {

@@ -180,7 +180,7 @@ Title=RMF Love
 
 File=http://217.74.72.13:8000/rmf_hopbec
 Ident=22
-Title=RMF Maxx Hop Bęc
+Title=RMF Maxx Hop Bec
 
 File=http://217.74.72.13:8000/rmf_jackson
 Ident=73

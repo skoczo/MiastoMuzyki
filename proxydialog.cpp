@@ -4,7 +4,7 @@
 proxyDialog::proxyDialog(QWidget *parent) : QDialog(parent),
 ui(new Ui::proxyDialog)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 
     if(parent==0||parent==NULL)
     {

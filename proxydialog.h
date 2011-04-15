@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 #include <QNetworkProxy>
+#include <QMessageBox>
 
 namespace Ui {
     class proxyDialog;
