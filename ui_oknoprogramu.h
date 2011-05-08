@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'oknoprogramu.ui'
 **
-** Created: Fri Apr 15 15:36:58 2011
+** Created: Sun May 8 18:12:49 2011
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

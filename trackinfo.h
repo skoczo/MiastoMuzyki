@@ -23,6 +23,7 @@ private:
 
 public:
     trackInfo(QMap<QString,QString> *info,list *l);
+    void setInfo(QMap<QString,QString> *info);
 
 private:
     void clean();

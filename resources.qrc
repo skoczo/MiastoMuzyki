@@ -3,5 +3,6 @@
         <file alias="header.jpg">images/header.jpg</file>
         <file alias="brak.jpg">images/brak.jpg</file>
         <file alias="strzalka.gif">images/strzalka.gif</file>
+        <file alias="zaslepka.jpg">images/zaslepka.jpg</file>
     </qresource>
 </RCC>

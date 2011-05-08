@@ -23,10 +23,3 @@ HEADERS += mainwindow.h \
 FORMS += oknoprogramu.ui \
     proxyDialog.ui
 RESOURCES += resources.qrc
-win32 { 
-    debug { 
-        CONFIG += console
-        DESTDIR = ../debug
-    }
-    else:DESTDIR = ../release
-}

@@ -26,6 +26,7 @@
 #include <QProgressBar>
 #include <QMouseEvent>
 #include <QMessageBox>
+#include <QThread>
 #include "parser.h"
 #include "trackinfo.h"
 #include "lista.h"
@@ -37,7 +38,7 @@ class MainWindow;
 class OknoProgramu;
 }
 //program version
-static QString version="0.4";
+static QString version="0.3.1";
 
 class MainWindow: public QMainWindow {
 Q_OBJECT
@@ -79,6 +80,7 @@ private:
 	proxyDialog *proxyDial;
 
 	QProgressBar *progressBar;
+        Parser *p;
 
 	void loadDataToList();
 	void hideShow(QWidget*,QWidget*,int);
@@ -95,6 +97,8 @@ private slots:
 	void setVolume(int);
 	void play_pause();
 	void about();
+        void recive(QMap<QString,QString>*,QMap<QString,QString>*);
+        void stationsFailed();
 };
 
 class FastSlider: public QSlider {

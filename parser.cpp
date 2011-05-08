@@ -3,10 +3,9 @@
 /*
  Put station name, station id and station url to map
  */
-Parser::Parser(QMap<QString, QString> *s,QMap<QString,QString> *i)
-{
-    stacje=s;
-    identyfikatory=i;
+Parser::Parser() {
+        stacje = new QMap<QString, QString>;
+        identyfikatory = new QMap<QString, QString>;;
 }
 
 /*
@@ -14,143 +13,117 @@ Parser::Parser(QMap<QString, QString> *s,QMap<QString,QString> *i)
  and put information from this file
  to maps
  */
-void Parser::start()
-{
-    QFile plik("stations/all.pls");
-    plik.open(QFile::ReadOnly);
+void Parser::start() {
+	access = new QNetworkAccessManager(this);
 
-    bool fail=false;
+	//when download data is finished finished slot is called
+	connect(access, SIGNAL(finished(QNetworkReply*)), this,
+			SLOT(finished(QNetworkReply*)));
 
-    if(plik.isReadable() == false)
-    {
-        qDebug("Parsed fail");
-        fail = true;
-    }
+        QString url="http://skoczo.pl/stacje.php";
+	access->get(QNetworkRequest(url));
+}
 
-    char *c=new char;
+void Parser::finished(QNetworkReply *reply) {
+	//if no error
+	if (reply->error() == 0) {
+		QString stat(reply->readAll());
 
-    //variable for remember file name
-    QString file,ident;
+		//variable for remember file name
+		QString file, ident;
 
-    if(fail == false)
-    {
-        while(!plik.atEnd())
-        {
-            //get char for parse
-            if(!plik.getChar(c))
-                break;
+		for (int i = 0; i < stat.length(); i++) {
+			if (stat[i] == '\n')
+				continue;
 
-            if(*c == '\n')
-                continue;
+			//variable for help
+			QString tmp = "";
+			tmp.append(stat[i]);
+                        i++;
 
-            //variable for help
-            QString tmp="";
-            tmp.append(*c);
+			//get first three chars
+                        for (int j = 0; j < 3 && i < stat.length() ; j++) {
+                                tmp.append(stat[i]);
+                                i++;
+			}
 
-            //get first three chars
-            for(int i=0;i<3;i++)
-            {
-                if(!plik.getChar(c))
-                    break;
+			//if it`s file
+			if (tmp == "File") {
+				//gets all chars to '=' char
+				while (stat[i] != '=') {
+					i++;
 
-                tmp.append(*c);
-            }
+					if (i >= stat.length())
+						break;
+				}
 
-            //if it`s file
-            if(tmp=="File")
-            {
-                //gets all chars to '=' char
-                while(*c!='=')
-                {
-                    if(!plik.getChar(c))
-                        break;
-                }
+				//clear tmp
+				tmp = "";
 
-                //clear tmp
-                tmp="";
+                                i++;
 
-                //get one char
-                if(!plik.getChar(c))
-                    break;
+                                while (stat[i] != '\n' && i < stat.length()) {
+					//remember chars to string
+					tmp.append(stat[i]);
+                                        i++;
+				}
 
-                while(*c!='\n')
-                {
-                    //remember chars to string
-                    tmp.append(*c);
+				//remember result
+				file = tmp;
+			}
 
-                    //if getChar gets false break loop
-                    if(!plik.getChar(c))
-                        break;
-                }
+			if (tmp == "Iden") {
+				//gets all chars to '=' char
+				while (stat[i] != '=') {
+					i++;
 
-                //qDebug(("file "+tmp).toAscii());
-                //remember result
-                file=tmp;
-            }
+					if (i >= stat.length())
+						break;
+				}
 
-            if(tmp=="Iden")
-            {
-                //gets all chars to '=' char
-                while(*c!='=')
-                {
-                    if(!plik.getChar(c))
-                        break;
-                }
+				//clear tmp
+				tmp = "";
 
-                //clear tmp
-                tmp="";
+                                i++;
+                                while (stat[i] != '\n' && i < stat.length()) {
+					//remember chars to string
+					tmp.append(stat[i]);
+                                        i++;
+				}
+				//remember result
+				ident = tmp;
+			}
 
-                //get one char
-                if(!plik.getChar(c))
-                    break;
+			//if this is title
+			if (tmp == "Titl") {
+				//gets all chars to '=' char
+				while (stat[i] != '=') {
+					i++;
 
-                while(*c!='\n')
-                {
-                    //remember chars to string
-                    tmp.append(*c);
+					if (i >= stat.length())
+						break;
+				}
 
-                    //if getChar gets false break loop
-                    if(!plik.getChar(c))
-                        break;
-                }
+				//clear tmp
+				tmp = "";
 
-                //remember result
-                ident=tmp;
-            }
-
-
-            //if this is title
-            if(tmp=="Titl")
-            {
-                //gets all chars to '=' char
-                while(*c!='=')
-                {
-                    if(!plik.getChar(c))
-                        break;
-                }
-
-                //clear tmp variable
-                tmp="";
-
-                //get one char
-                if(!plik.getChar(c))
-                    break;
-
-                //get all chars to new line
-                while(*c!='\n')
-                {
-                    //remember chars to tmp
-                    tmp.append(*c);
-
-                    if(!plik.getChar(c))
-                        break;
-                }
-                //remember results to map
-                (*stacje)[tmp]=file;
-                (*identyfikatory)[tmp]=ident;
-            }
-
-        }
-        qDebug("Stations list parsed");
-    }
+                                i++;
+                                while (stat[i] != '\n' && i < stat.length()) {
+					//remember chars to string
+					tmp.append(stat[i]);
+                                        i++;
+				}
+				//remember results to map
+				(*stacje)[tmp] = file;
+				(*identyfikatory)[tmp] = ident;
+			}
+		}
+                qDebug("Stations list parsed");
+                emit send(stacje, identyfikatory);
+	}
+	//if error send NULL
+	else {
+                qDebug("Stations load failed "+reply->errorString().toAscii());
+                emit fail();
+	}
 }
