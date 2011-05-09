@@ -40,7 +40,7 @@ class MainWindow;
 class OknoProgramu;
 }
 //program version
-static QString version="0.3.2";
+static QString version="0.4";
 
 class MainWindow: public QMainWindow {
 Q_OBJECT
