@@ -20,7 +20,7 @@ void Parser::start() {
 	connect(access, SIGNAL(finished(QNetworkReply*)), this,
 			SLOT(finished(QNetworkReply*)));
 
-        QString url="http://skoczo.pl/stacje.php";
+        QString url="http://skoczo.pl/all.pls";
 	access->get(QNetworkRequest(url));
 }
 
@@ -28,6 +28,11 @@ void Parser::finished(QNetworkReply *reply) {
 	//if no error
 	if (reply->error() == 0) {
 		QString stat(reply->readAll());
+
+                QFile plik("plik.txt");
+                plik.open(QIODevice::WriteOnly);
+                plik.write(stat.toAscii());
+                plik.close();
 
 		//variable for remember file name
 		QString file, ident;
