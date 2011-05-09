@@ -29,11 +29,6 @@ void Parser::finished(QNetworkReply *reply) {
 	if (reply->error() == 0) {
 		QString stat(reply->readAll());
 
-                QFile plik("plik.txt");
-                plik.open(QIODevice::WriteOnly);
-                plik.write(stat.toAscii());
-                plik.close();
-
 		//variable for remember file name
 		QString file, ident;
 
