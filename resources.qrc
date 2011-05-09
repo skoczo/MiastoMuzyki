@@ -4,5 +4,6 @@
         <file alias="brak.jpg">images/brak.jpg</file>
         <file alias="strzalka.gif">images/strzalka.gif</file>
         <file alias="zaslepka.jpg">images/zaslepka.jpg</file>
+        <file alias="splashHeader.jpg">images/splashHeader.jpg</file>
     </qresource>
 </RCC>

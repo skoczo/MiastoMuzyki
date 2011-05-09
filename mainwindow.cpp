@@ -2,13 +2,20 @@
 #include "ui_oknoprogramu.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-	QMainWindow(parent), ui(new Ui::OknoProgramu) {
+        QMainWindow(parent), ui(new Ui::OknoProgramu)
+{
 	isPlay = false;
 
 	//set application name
 	QCoreApplication::setApplicationName("MiastoMuzyki");
 	ui->setupUi(this);
-	setWindowTitle("Miasto Muzyki");
+
+        setWindowTitle("Miasto Muzyki");
+
+        splash = new QSplashScreen(this, QPixmap(":/splashHeader.jpg"));
+
+        splash->show();
+        splash->showMessage(tr("Tworzenie okna"), Qt::AlignCenter|Qt::AlignBottom);
 
 	QStringList capabiliteisList =
 			Phonon::BackendCapabilities::availableMimeTypes();
@@ -43,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	//set background
 	setStyleSheet("QMainWindow { background-color: #182838; }");
 
-	//ui->listWidget->setStyleSheet("QWidget {background-color: #182838;}");
+        splash->showMessage(tr("Uruchamianie phonon"), Qt::AlignCenter|Qt::AlignBottom);
 	mediaObject = new Phonon::MediaObject(this);
 
 	audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
@@ -105,8 +112,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	//need this for get actual information about station
 	identificators = new QMap<QString, QString> ;
 
-        //sleep(1);
-
 	//class which load images
 	load = new imageLoad();
 	loadNext = new imageLoad();
@@ -128,7 +133,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
 
 	//set volume widget
-	//hide old volume vidget
+        //hide old volume widget
 	ui->volume->setVisible(false);
 
 	//new volume widget which set volume to clicked
@@ -141,14 +146,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
         //file parser
         //this class add stations to window
+        splash->showMessage(tr("Ładowanie listy stacji"), Qt::AlignCenter|Qt::AlignBottom);
+
         p = new Parser();
         p->start();
 
         //add parsed data from QMapIterator<QString,QString> to window
         connect(p, SIGNAL(send(QMap<QString,QString>*,QMap<QString,QString>*)), this, SLOT(recive(QMap<QString,QString>*,QMap<QString,QString>*)));
         connect(p, SIGNAL(fail()), this, SLOT(stationsFailed()));
-        //this->loadDataToList();
-        //ui->listWidget->setCurrentRow(0);
 	connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
 
 	//if track info emit e_dane run update function
@@ -171,6 +176,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	//run this function every 5 second
 	timer->start(5000);
 
+        //center
+        move((QApplication::desktop()->width()/2-width()/2)
+             ,(QApplication::desktop()->height()/2-height()/2));
+
 	audioOutput->setVolume((qreal) 1);
 }
 
@@ -180,10 +189,13 @@ void MainWindow::setVolume(int i) {
 
 void MainWindow::stationsFailed()
 {
+    splash->finish(this);
+
     if(QMessageBox::Ok == QMessageBox::information(this, tr("Błąd")
                              ,tr("<center>Błąd przy odbieraniu listy stacji. <br>Ponowić próbę?</center>")
                              ,QMessageBox::Ok,QMessageBox::Cancel))
     {
+        splash->show();
         p->start();
     }
     else
@@ -400,11 +412,16 @@ void MainWindow::checkPlayList() {
 
 void MainWindow::recive(QMap<QString,QString>* s,QMap<QString,QString>* i)
 {
+    splash->finish(this);
     stations = s;
     identificators = i;
 
     this->loadDataToList();
     info->setInfo(i);
+
+    ui->listWidget->setCurrentRow(0);
+
+    this->show();
 }
 
 /*

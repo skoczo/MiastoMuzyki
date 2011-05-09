@@ -8,11 +8,8 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("ISO 8859-2"));
     QTextCodec::setCodecForTr (QTextCodec::codecForName ("UTF-8"));
 
-//    loader o;
-//    o.show();
-
     MainWindow w;
-    w.show();
+    w.hide();
 
     return a.exec();
 }

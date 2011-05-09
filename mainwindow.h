@@ -16,6 +16,7 @@
 #include <QUrl>
 #include <QMap>
 #include <QMapIterator>
+#include <QDesktopWidget>
 #include <QTimer>
 #include <phonon/MediaObject>
 #include <phonon/phonon>
@@ -26,6 +27,7 @@
 #include <QProgressBar>
 #include <QMouseEvent>
 #include <QMessageBox>
+#include <QSplashScreen>
 #include <QThread>
 #include "parser.h"
 #include "trackinfo.h"
@@ -38,7 +40,7 @@ class MainWindow;
 class OknoProgramu;
 }
 //program version
-static QString version="0.3.1";
+static QString version="0.3.2";
 
 class MainWindow: public QMainWindow {
 Q_OBJECT
@@ -81,6 +83,8 @@ private:
 
 	QProgressBar *progressBar;
         Parser *p;
+
+        QSplashScreen *splash;
 
 	void loadDataToList();
 	void hideShow(QWidget*,QWidget*,int);
