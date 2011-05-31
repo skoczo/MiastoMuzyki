@@ -20,9 +20,10 @@ get file with play list
 */
 void trackInfo::show(QString station)
 {
-    //QString num=(*info)[station];
-
-    access->get(QNetworkRequest("http://www.miastomuzyki.pl/stacje/stacje_gramy_"+(*info)[station]+".txt"));
+	if(station.length() > 0)
+	{
+		access->get(QNetworkRequest("http://www.miastomuzyki.pl/stacje/stacje_gramy_"+(*info)[station]+".txt"));
+	}
 }
 
 void trackInfo::clean()

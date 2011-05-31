@@ -23,3 +23,4 @@ HEADERS += mainwindow.h \
 FORMS += oknoprogramu.ui \
     proxyDialog.ui
 RESOURCES += resources.qrc
+RC_FILE = myapp.rc

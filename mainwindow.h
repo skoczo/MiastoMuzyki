@@ -28,6 +28,7 @@
 #include <QMouseEvent>
 #include <QMessageBox>
 #include <QSplashScreen>
+#include <QSystemTrayIcon>
 #include <QThread>
 #include "parser.h"
 #include "trackinfo.h"
@@ -40,7 +41,7 @@ class MainWindow;
 class OknoProgramu;
 }
 //program version
-static QString version="0.4";
+static QString version = "0.4";
 
 class MainWindow: public QMainWindow {
 Q_OBJECT
@@ -82,12 +83,14 @@ private:
 	proxyDialog *proxyDial;
 
 	QProgressBar *progressBar;
-        Parser *p;
+	Parser *p;
 
-        QSplashScreen *splash;
+	QSplashScreen *splash;
+
+	QSystemTrayIcon tray;
 
 	void loadDataToList();
-	void hideShow(QWidget*,QWidget*,int);
+	void hideShow(QWidget*, QWidget*, int);
 
 private slots:
 	void on_actionUstawienia_triggered();
@@ -101,8 +104,9 @@ private slots:
 	void setVolume(int);
 	void play_pause();
 	void about();
-        void recive(QMap<QString,QString>*,QMap<QString,QString>*);
-        void stationsFailed();
+	void recive(QMap<QString, QString>*, QMap<QString, QString>*);
+	void stationsFailed();
+	void iconClicked(QSystemTrayIcon::ActivationReason event);
 };
 
 class FastSlider: public QSlider {

@@ -123,7 +123,7 @@ void Parser::finished(QNetworkReply *reply) {
 	}
 	//if error send NULL
 	else {
-                qDebug("Stations load failed "+reply->errorString().toAscii());
+                qDebug() << ("Stations load failed "+reply->errorString());
                 emit fail();
 	}
 }

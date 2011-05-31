@@ -6,16 +6,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 	isPlay = false;
 
+	setWindowIcon(QIcon(":/images/icon.ico"));
+
 	//set application name
 	QCoreApplication::setApplicationName("MiastoMuzyki");
 	ui->setupUi(this);
 
-        setWindowTitle("Miasto Muzyki");
+	setWindowTitle("Miasto Muzyki");
 
-        splash = new QSplashScreen(this, QPixmap(":/splashHeader.jpg"));
+	splash = new QSplashScreen(this, QPixmap(":/splashHeader.jpg"));
 
-        splash->show();
-        splash->showMessage(tr("Tworzenie okna"), Qt::AlignCenter|Qt::AlignBottom);
+	splash->show();
+	splash->showMessage(tr("Tworzenie okna"), Qt::AlignCenter | Qt::AlignBottom);
 
 	QStringList capabiliteisList =
 			Phonon::BackendCapabilities::availableMimeTypes();
@@ -168,6 +170,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->play_pause, SIGNAL(clicked()), this, SLOT(play_pause()));
 
 	connect(ui->actionO_programie, SIGNAL(triggered()), this, SLOT(about()));
+	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
 
 	//timer
 	timer = new QTimer(this);
@@ -181,10 +184,24 @@ MainWindow::MainWindow(QWidget *parent) :
              ,(QApplication::desktop()->height()/2-height()/2));
 
 	audioOutput->setVolume((qreal) 1);
+
+	tray.setIcon(QIcon(":/images/icon.ico"));
+	tray.show();
 }
 
 void MainWindow::setVolume(int i) {
 	audioOutput->setVolume((qreal) i / 100.f);
+}
+
+void MainWindow::iconClicked(QSystemTrayIcon::ActivationReason event)
+{
+	if(event == QSystemTrayIcon::DoubleClick)
+	{
+		if(isVisible())
+			setVisible(false);
+		else
+			setVisible(true);
+	}
 }
 
 void MainWindow::stationsFailed()
@@ -406,7 +423,7 @@ void MainWindow::imageNext(QPixmap *p) {
  this slot update information about tracks
  */
 void MainWindow::checkPlayList() {
-	if (actualStation.length() > 0)
+	if (actualStation.length() > 0 && isPlay)
 		info->show(actualStation);
 }
 

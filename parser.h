@@ -7,8 +7,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <string>
-#include <iostream>
+#include <QDebug>
 
 class Parser: public QObject
 {
