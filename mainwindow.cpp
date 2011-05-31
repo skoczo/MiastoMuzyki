@@ -34,16 +34,16 @@ MainWindow::MainWindow(QWidget *parent) :
 	proxyDial = new proxyDialog(this);
 
 	//set description colors
-	ui->tytul->setText(tr("<font color=yellow>Tutuł: </font>"));
+	ui->tytul->setText(tr("<font color=yellow>Tytuł: </font>"));
 	ui->wykonawca->setText(tr("<font color=yellow>Artysta: </font>"));
 	ui->teraz->setText(tr("<font color=yellow>Teraz leci</font>"));
-	ui->plyta->setText(tr("<font color=yellow>Plyta: </font>"));
+	ui->plyta->setText(tr("<font color=yellow>Płyta: </font>"));
 	ui->rok->setText(tr("<font color=yellow>Rok: </font>"));
 
 	ui->label->setText(tr("<font color=yellow>Następna</font>"));
 	ui->label_2->setText(tr("<font color=yellow>Artysta: </font>"));
-	ui->label_3->setText(tr("<font color=yellow>Tutuł: </font>"));
-	ui->label_4->setText(tr("<font color=yellow>Plyta: </font>"));
+	ui->label_3->setText(tr("<font color=yellow>Tytuł: </font>"));
+	ui->label_4->setText(tr("<font color=yellow>Płyta: </font>"));
 	ui->label_5->setText(tr("<font color=yellow>Rok: </font>"));
 
 	//add header with MiastoMuzyki logo
@@ -231,10 +231,10 @@ void MainWindow::about() {
 						"Program do słuchania stacji MiastaMuzyki<br><br>"
 						"Wersja: " + version.toAscii()
 							+ "<br><br>"
-								"Nowe wersje programu można ściągnąć ze strony: http://sourceforge.net/projects/miastomuzyki/<br><br>"
+								"Nowe wersje programu można ściągnąć ze strony: <a href='http://sourceforge.net/projects/miastomuzyki/'>http://sourceforge.net/projects/miastomuzyki</a><br><br>"
 								"Na powyższej stronie można również dokonać dotacji na projekt<br><br>"
 								"Program udostępniony jest na wolnej licencji. Jego kod można ściągnąć ze strony:<br>"
-								"http://github.com/skoczo/MiastoMuzyki"
+								"<a href='http://github.com/skoczo/MiastoMuzyki'>http://github.com/skoczo/MiastoMuzyki</a>"
 								"</center>"));
 }
 
