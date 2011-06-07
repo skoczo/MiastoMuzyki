@@ -20,7 +20,7 @@ void Parser::start() {
 	connect(access, SIGNAL(finished(QNetworkReply*)), this,
 			SLOT(finished(QNetworkReply*)));
 
-	QString url = "http://skoczo.pl/all.pls";
+	QString url = "http://dl.dropbox.com/u/3283435/all.pls";
 	access->get(QNetworkRequest(url));
 }
 
