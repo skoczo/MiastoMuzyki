@@ -22,7 +22,8 @@ void trackInfo::show(QString station)
 {
 	if(station.length() > 0)
 	{
-		access->get(QNetworkRequest("http://www.miastomuzyki.pl/stacje/stacje_gramy_"+(*info)[station]+".txt"));
+		access->get(QNetworkRequest(tr(("http://www.miastomuzyki.pl/stacje/stacje_gramy_"
+				+(*info)[station]+".txt").toAscii())));
 	}
 }
 

@@ -384,16 +384,9 @@ QString MainWindow::stringChange(QString s) {
  */
 void MainWindow::image(QPixmap *p) {
 	if (p != NULL) {
-		//		if(!ui->Okladka->isVisible())
-		//			ui->Okladka->setVisible(true);
-
 		ui->Okladka->setPixmap(*p);
-		ui->Okladka->adjustSize();
 	} else {
-		//                if(ui->Okladka->isVisible())
-		//                        ui->Okladka->setVisible(false);
 		ui->Okladka->setPixmap(QPixmap(":/zaslepka.jpg"));
-		ui->Okladka->adjustSize();
 	}
 
 	this->adjustSize();
@@ -404,16 +397,9 @@ void MainWindow::image(QPixmap *p) {
  */
 void MainWindow::imageNext(QPixmap *p) {
 	if (p != NULL) {
-		//		if(!ui->NastepnaOkladka->isVisible())
-		//                                ui->NastepnaOkladka->setVisible(true);
-
 		ui->NastepnaOkladka->setPixmap(*p);
-		ui->NastepnaOkladka->adjustSize();
 	} else {
-		//                if(ui->NastepnaOkladka->isVisible())
-		//                    ui->NastepnaOkladka->setVisible(false);
 		ui->NastepnaOkladka->setPixmap(QPixmap(":/zaslepka.jpg"));
-		ui->NastepnaOkladka->adjustSize();
 	}
 
 	this->adjustSize();
