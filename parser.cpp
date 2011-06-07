@@ -4,8 +4,8 @@
  Put station name, station id and station url to map
  */
 Parser::Parser() {
-        stacje = new QMap<QString, QString>;
-        identyfikatory = new QMap<QString, QString>;;
+	stacje = new QMap<QString, QString> ;
+	identyfikatory = new QMap<QString, QString> ;
 }
 
 /*
@@ -20,7 +20,7 @@ void Parser::start() {
 	connect(access, SIGNAL(finished(QNetworkReply*)), this,
 			SLOT(finished(QNetworkReply*)));
 
-        QString url="http://skoczo.pl/all.pls";
+	QString url = "http://skoczo.pl/all.pls";
 	access->get(QNetworkRequest(url));
 }
 
@@ -39,12 +39,12 @@ void Parser::finished(QNetworkReply *reply) {
 			//variable for help
 			QString tmp = "";
 			tmp.append(stat[i]);
-                        i++;
+			i++;
 
 			//get first three chars
-                        for (int j = 0; j < 3 && i < stat.length() ; j++) {
-                                tmp.append(stat[i]);
-                                i++;
+			for (int j = 0; j < 3 && i < stat.length(); j++) {
+				tmp.append(stat[i]);
+				i++;
 			}
 
 			//if it`s file
@@ -60,12 +60,12 @@ void Parser::finished(QNetworkReply *reply) {
 				//clear tmp
 				tmp = "";
 
-                                i++;
+				i++;
 
-                                while (stat[i] != '\n' && i < stat.length()) {
+				while (stat[i] != '\n' && i < stat.length()) {
 					//remember chars to string
 					tmp.append(stat[i]);
-                                        i++;
+					i++;
 				}
 
 				//remember result
@@ -84,11 +84,11 @@ void Parser::finished(QNetworkReply *reply) {
 				//clear tmp
 				tmp = "";
 
-                                i++;
-                                while (stat[i] != '\n' && i < stat.length()) {
+				i++;
+				while (stat[i] != '\n' && i < stat.length()) {
 					//remember chars to string
 					tmp.append(stat[i]);
-                                        i++;
+					i++;
 				}
 				//remember result
 				ident = tmp;
@@ -107,23 +107,23 @@ void Parser::finished(QNetworkReply *reply) {
 				//clear tmp
 				tmp = "";
 
-                                i++;
-                                while (stat[i] != '\n' && i < stat.length()) {
+				i++;
+				while (stat[i] != '\n' && i < stat.length()) {
 					//remember chars to string
 					tmp.append(stat[i]);
-                                        i++;
+					i++;
 				}
 				//remember results to map
 				(*stacje)[tmp] = file;
 				(*identyfikatory)[tmp] = ident;
 			}
 		}
-                qDebug("Stations list parsed");
-                emit send(stacje, identyfikatory);
+		qDebug("Stations list parsed");
+		emit send(stacje, identyfikatory);
 	}
 	//if error send NULL
 	else {
-                qDebug() << ("Stations load failed "+reply->errorString());
-                emit fail();
+		qDebug() << ("Stations load failed " + reply->errorString());
+		emit fail();
 	}
 }

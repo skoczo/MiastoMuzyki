@@ -2,8 +2,7 @@
 #include "ui_oknoprogramu.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent), ui(new Ui::OknoProgramu)
-{
+	QMainWindow(parent), ui(new Ui::OknoProgramu) {
 	isPlay = false;
 
 	setWindowIcon(QIcon(":/images/icon.ico"));
@@ -52,7 +51,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	//set background
 	setStyleSheet("QMainWindow { background-color: #182838; }");
 
-        splash->showMessage(tr("Uruchamianie phonon"), Qt::AlignCenter|Qt::AlignBottom);
+	splash->showMessage(tr("Uruchamianie phonon"),
+			Qt::AlignCenter | Qt::AlignBottom);
 	mediaObject = new Phonon::MediaObject(this);
 
 	audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
@@ -135,7 +135,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
 
 	//set volume widget
-        //hide old volume widget
+	//hide old volume widget
 	ui->volume->setVisible(false);
 
 	//new volume widget which set volume to clicked
@@ -146,16 +146,18 @@ MainWindow::MainWindow(QWidget *parent) :
 	volume->setOrientation(Qt::Horizontal);
 	ui->horizontalLayout_5->addWidget(volume);
 
-        //file parser
-        //this class add stations to window
-        splash->showMessage(tr("Ładowanie listy stacji"), Qt::AlignCenter|Qt::AlignBottom);
+	//file parser
+	//this class add stations to window
+	splash->showMessage(tr("Ładowanie listy stacji"),
+			Qt::AlignCenter | Qt::AlignBottom);
 
-        p = new Parser();
-        p->start();
+	p = new Parser();
+	p->start();
 
-        //add parsed data from QMapIterator<QString,QString> to window
-        connect(p, SIGNAL(send(QMap<QString,QString>*,QMap<QString,QString>*)), this, SLOT(recive(QMap<QString,QString>*,QMap<QString,QString>*)));
-        connect(p, SIGNAL(fail()), this, SLOT(stationsFailed()));
+	//add parsed data from QMapIterator<QString,QString> to window
+	connect(p, SIGNAL(send(QMap<QString,QString>*,QMap<QString,QString>*)),
+			this, SLOT(recive(QMap<QString,QString>*,QMap<QString,QString>*)));
+	connect(p, SIGNAL(fail()), this, SLOT(stationsFailed()));
 	connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
 
 	//if track info emit e_dane run update function
@@ -170,7 +172,12 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->play_pause, SIGNAL(clicked()), this, SLOT(play_pause()));
 
 	connect(ui->actionO_programie, SIGNAL(triggered()), this, SLOT(about()));
-	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),this,SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
+	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this,
+			SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
+
+        //play on enter key push
+        connect(ui->listWidget, SIGNAL(activated(QModelIndex)), this,
+                        SLOT(on_listWidget_doubleClicked(QModelIndex)));
 
 	//timer
 	timer = new QTimer(this);
@@ -179,9 +186,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	//run this function every 5 second
 	timer->start(5000);
 
-        //center
-        move((QApplication::desktop()->width()/2-width()/2)
-             ,(QApplication::desktop()->height()/2-height()/2));
+	//center
+	move((QApplication::desktop()->width() / 2 - width() / 2),
+			(QApplication::desktop()->height() / 2 - height() / 2));
 
 	audioOutput->setVolume((qreal) 1);
 
@@ -193,32 +200,30 @@ void MainWindow::setVolume(int i) {
 	audioOutput->setVolume((qreal) i / 100.f);
 }
 
-void MainWindow::iconClicked(QSystemTrayIcon::ActivationReason event)
-{
-	if(event == QSystemTrayIcon::DoubleClick)
-	{
-		if(isVisible())
+void MainWindow::iconClicked(QSystemTrayIcon::ActivationReason event) {
+	if (event == QSystemTrayIcon::DoubleClick) {
+		if (isVisible())
 			setVisible(false);
 		else
 			setVisible(true);
 	}
 }
 
-void MainWindow::stationsFailed()
-{
-    splash->finish(this);
+void MainWindow::stationsFailed() {
+	splash->finish(this);
 
-    if(QMessageBox::Ok == QMessageBox::information(this, tr("Błąd")
-                             ,tr("<center>Błąd przy odbieraniu listy stacji. <br>Ponowić próbę?</center>")
-                             ,QMessageBox::Ok,QMessageBox::Cancel))
-    {
-        splash->show();
-        p->start();
-    }
-    else
-    {
-        close();
-    }
+	if (QMessageBox::Ok
+			== QMessageBox::information(
+					this,
+					tr("Błąd"),
+					tr(
+							"<center>Błąd przy odbieraniu listy stacji. <br>Ponowić próbę?</center>"),
+					QMessageBox::Ok, QMessageBox::Cancel)) {
+		splash->show();
+		p->start();
+	} else {
+		close();
+	}
 }
 
 void MainWindow::about() {
@@ -413,18 +418,17 @@ void MainWindow::checkPlayList() {
 		info->show(actualStation);
 }
 
-void MainWindow::recive(QMap<QString,QString>* s,QMap<QString,QString>* i)
-{
-    splash->finish(this);
-    stations = s;
-    identificators = i;
+void MainWindow::recive(QMap<QString, QString>* s, QMap<QString, QString>* i) {
+	splash->finish(this);
+	stations = s;
+	identificators = i;
 
-    this->loadDataToList();
-    info->setInfo(i);
+	this->loadDataToList();
+	info->setInfo(i);
 
-    ui->listWidget->setCurrentRow(0);
+	ui->listWidget->setCurrentRow(0);
 
-    this->show();
+	this->show();
 }
 
 /*
