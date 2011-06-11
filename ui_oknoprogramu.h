@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'oknoprogramu.ui'
 **
-** Created: Thu Jun 9 18:27:27 2011
+** Created: Sat Jun 11 18:06:59 2011
 **      by: Qt User Interface Compiler version 4.7.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -37,6 +37,7 @@ class Ui_OknoProgramu
 public:
     QAction *actionO_programie;
     QAction *actionUstawienia;
+    QAction *actionOpcje;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -92,6 +93,8 @@ public:
         actionO_programie->setObjectName(QString::fromUtf8("actionO_programie"));
         actionUstawienia = new QAction(OknoProgramu);
         actionUstawienia->setObjectName(QString::fromUtf8("actionUstawienia"));
+        actionOpcje = new QAction(OknoProgramu);
+        actionOpcje->setObjectName(QString::fromUtf8("actionOpcje"));
         centralwidget = new QWidget(OknoProgramu);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout_2 = new QHBoxLayout(centralwidget);
@@ -293,7 +296,7 @@ public:
         OknoProgramu->setCentralWidget(centralwidget);
         menubar = new QMenuBar(OknoProgramu);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 476, 23));
+        menubar->setGeometry(QRect(0, 0, 476, 25));
         menuUstawienia = new QMenu(menubar);
         menuUstawienia->setObjectName(QString::fromUtf8("menuUstawienia"));
         menuPomoc = new QMenu(menubar);
@@ -306,6 +309,7 @@ public:
         menubar->addAction(menuUstawienia->menuAction());
         menubar->addAction(menuPomoc->menuAction());
         menuUstawienia->addAction(actionUstawienia);
+        menuUstawienia->addAction(actionOpcje);
         menuPomoc->addAction(actionO_programie);
 
         retranslateUi(OknoProgramu);
@@ -318,6 +322,7 @@ public:
         OknoProgramu->setWindowTitle(QApplication::translate("OknoProgramu", "MainWindow", 0, QApplication::UnicodeUTF8));
         actionO_programie->setText(QApplication::translate("OknoProgramu", "O programie", 0, QApplication::UnicodeUTF8));
         actionUstawienia->setText(QApplication::translate("OknoProgramu", "Proxy", 0, QApplication::UnicodeUTF8));
+        actionOpcje->setText(QApplication::translate("OknoProgramu", "Opcje", 0, QApplication::UnicodeUTF8));
         teraz->setText(QApplication::translate("OknoProgramu", "Teraz", 0, QApplication::UnicodeUTF8));
         Okladka->setText(QString());
         wykonawca->setText(QApplication::translate("OknoProgramu", "Wykonawca:", 0, QApplication::UnicodeUTF8));

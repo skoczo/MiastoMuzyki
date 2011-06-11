@@ -32,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	//proxy
 	proxyDial = new proxyDialog(this);
 
+	//options
+	optionsDial = new Options(this);
+
 	//set description colors
 	ui->tytul->setText(tr("<font color=yellow>Tytuł: </font>"));
 	ui->wykonawca->setText(tr("<font color=yellow>Artysta: </font>"));
@@ -175,9 +178,11 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this,
 			SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
 
-        //play on enter key push
-        connect(ui->listWidget, SIGNAL(activated(QModelIndex)), this,
-                        SLOT(on_listWidget_doubleClicked(QModelIndex)));
+	//play on enter key push
+	connect(ui->listWidget, SIGNAL(activated(QModelIndex)), this,
+			SLOT(on_listWidget_doubleClicked(QModelIndex)));
+
+	connect(ui->actionOpcje, SIGNAL(triggered()), this, SLOT(options()));
 
 	//timer
 	timer = new QTimer(this);
@@ -261,103 +266,174 @@ void MainWindow::setProxy(QNetworkProxy p) {
 	qDebug("Proxy setup");
 }
 
+bool MainWindow::newData() {
+	static list old;
+	bool result = false;
+
+	if (old.actual.disk != lis->actual.disk) {
+		result = true;
+		old.actual.disk = lis->actual.disk;
+	}
+
+	if (old.actual.artist != lis->actual.artist) {
+		result = true;
+		old.actual.artist = lis->actual.artist;
+	}
+
+	if (old.actual.idp != lis->actual.idp) {
+		result = true;
+		old.actual.idp = lis->actual.idp;
+	}
+
+	if (old.actual.title != lis->actual.title) {
+		result = true;
+		old.actual.title = lis->actual.title;
+	}
+
+	if (old.actual.year != lis->actual.year) {
+		result = true;
+		old.actual.year = lis->actual.year;
+	}
+
+	if (old.next.disk != lis->next.disk) {
+		result = true;
+		old.next.disk = lis->next.disk;
+	}
+
+	if (old.next.artist != lis->next.artist) {
+		result = true;
+		old.next.artist = lis->next.artist;
+	}
+
+	if (old.next.idp != lis->next.idp) {
+		result = true;
+		old.next.idp = lis->next.idp;
+	}
+
+	if (old.next.title != lis->next.title) {
+		result = true;
+		old.next.title = lis->next.title;
+	}
+
+	if (old.next.year != lis->next.year) {
+		result = true;
+		old.next.year = lis->next.year;
+	}
+
+	return result;
+}
+
+void MainWindow::showTrayMessage() {
+	if (optionsDial->isChecket()) {
+		tray.showMessage(
+				"Aktualna piosenka",
+				"Artysta: " + lis->actual.artist + tr("\nTytuł: ")
+				+ lis->actual.title, QSystemTrayIcon::NoIcon, 3000);
+	}
+}
+
 /*this function update information about
  track in window. Load title and others information
  and cd picture
  */
 void MainWindow::update() {
 	if (lis != NULL) {
-		//load txt data
-		ui->TerazPlyta->setText(
-				"<font color=yellow>" + stringChange(lis->actual.disk)
-						+ "</font>");
+		if (newData()) {
+			showTrayMessage();
 
-		ui->TerazRok->setText(
-				"<font color=yellow>" + stringChange(lis->actual.year)
-						+ "</font>");
+			//load txt data
+			ui->TerazPlyta->setText(
+					"<font color=yellow>" + stringChange(lis->actual.disk)
+							+ "</font>");
 
-		ui->TerazTytul->setText(
-				"<font color=yellow>" + stringChange(lis->actual.title)
-						+ "</font>");
+			ui->TerazRok->setText(
+					"<font color=yellow>" + stringChange(lis->actual.year)
+							+ "</font>");
 
-		ui->TerazWykonawca->setText(
-				"<font color=yellow>" + stringChange(lis->actual.artist)
-						+ "</font>");
+			ui->TerazTytul->setText(
+					"<font color=yellow>" + stringChange(lis->actual.title)
+							+ "</font>");
 
-		ui->NastepnaWykonawca->setText(
-				"<font color=yellow>" + stringChange(lis->next.artist)
-						+ "</font>");
+			ui->TerazWykonawca->setText(
+					"<font color=yellow>" + stringChange(lis->actual.artist)
+							+ "</font>");
 
-		ui->NastepnaPlyta->setText(
-				"<font color=yellow>" + stringChange(lis->next.disk)
-						+ "</font>");
+			ui->NastepnaWykonawca->setText(
+					"<font color=yellow>" + stringChange(lis->next.artist)
+							+ "</font>");
 
-		ui->NastepnaRok->setText(
-				"<font color=yellow>" + stringChange(lis->next.year)
-						+ "</font>");
+			ui->NastepnaPlyta->setText(
+					"<font color=yellow>" + stringChange(lis->next.disk)
+							+ "</font>");
 
-		ui->NastepnaTytul->setText(
-				"<font color=yellow>" + stringChange(lis->next.title)
-						+ "</font>");
+			ui->NastepnaRok->setText(
+					"<font color=yellow>" + stringChange(lis->next.year)
+							+ "</font>");
 
-		//this loads played track picture
-		//url picture depends aktualny->ipd length
-		if (lis->actual.idp.length() > 4) {
-			load->load(
-					"http://doc.rmf.pl/media/img_muzyka/plyta/"
-							+ lis->actual.idp[0] + lis->actual.idp[1] + "/"
-							+ lis->actual.idp + ".jpg");
-			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
-					+ lis->actual.idp[0] + lis->actual.idp[1] + "/"
-					+ lis->actual.idp + ".jpg");
-		} else if (lis->actual.idp.length() == 4) {
-			load->load(
-					"http://doc.rmf.pl/media/img_muzyka/plyta/"
-							+ lis->actual.idp[0] + "/" + lis->actual.idp
-							+ ".jpg");
-			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
-					+ lis->actual.idp[0] + "/" + lis->actual.idp + ".jpg");
-		} else {
-			if (lis->actual.idp.length() > 0)
+			ui->NastepnaTytul->setText(
+					"<font color=yellow>" + stringChange(lis->next.title)
+							+ "</font>");
+
+			//this loads played track picture
+			//url picture depends aktualny->ipd length
+			if (lis->actual.idp.length() > 4) {
 				load->load(
-						"http://doc.rmf.pl/media/img_muzyka/plyta/0/"
+						"http://doc.rmf.pl/media/img_muzyka/plyta/"
+								+ lis->actual.idp[0] + lis->actual.idp[1] + "/"
 								+ lis->actual.idp + ".jpg");
-			else {
-				image(new QPixmap(":/zaslepka.jpg"));
-				//image(NULL);
+				qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
+						+ lis->actual.idp[0] + lis->actual.idp[1] + "/"
+						+ lis->actual.idp + ".jpg");
+			} else if (lis->actual.idp.length() == 4) {
+				load->load(
+						"http://doc.rmf.pl/media/img_muzyka/plyta/"
+								+ lis->actual.idp[0] + "/" + lis->actual.idp
+								+ ".jpg");
+				qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
+						+ lis->actual.idp[0] + "/" + lis->actual.idp + ".jpg");
+			} else {
+				if (lis->actual.idp.length() > 0)
+					load->load(
+							"http://doc.rmf.pl/media/img_muzyka/plyta/0/"
+									+ lis->actual.idp + ".jpg");
+				else {
+					image(new QPixmap(":/zaslepka.jpg"));
+					//image(NULL);
+				}
+
+				qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/0/"
+						+ lis->actual.idp + ".jpg");
 			}
 
-			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/0/"
-					+ lis->actual.idp + ".jpg");
-		}
-
-		//this do that same but for the next song
-		if (lis->next.idp.length() > 4) {
-			loadNext->load(
-					"http://doc.rmf.pl/media/img_muzyka/plyta/"
-							+ lis->next.idp[0] + lis->next.idp[1] + "/"
-							+ lis->next.idp + ".jpg");
-			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
-					+ lis->next.idp[0] + lis->next.idp[1] + "/" + lis->next.idp
-					+ ".jpg");
-		} else if (lis->next.idp.length() == 4) {
-			loadNext->load(
-					"http://doc.rmf.pl/media/img_muzyka/plyta/"
-							+ lis->next.idp[0] + "/" + lis->next.idp + ".jpg");
-			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
-					+ lis->next.idp[0] + "/" + lis->next.idp + ".jpg");
-		} else {
-			if (lis->next.idp > 0)
+			//this do that same but for the next song
+			if (lis->next.idp.length() > 4) {
 				loadNext->load(
-						"http://doc.rmf.pl/media/img_muzyka/plyta/0/"
+						"http://doc.rmf.pl/media/img_muzyka/plyta/"
+								+ lis->next.idp[0] + lis->next.idp[1] + "/"
 								+ lis->next.idp + ".jpg");
-			else {
-				imageNext(new QPixmap(":/zaslepka.jpg"));
-				//imageNext(NULL);
-			}
+				qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
+						+ lis->next.idp[0] + lis->next.idp[1] + "/"
+						+ lis->next.idp + ".jpg");
+			} else if (lis->next.idp.length() == 4) {
+				loadNext->load(
+						"http://doc.rmf.pl/media/img_muzyka/plyta/"
+								+ lis->next.idp[0] + "/" + lis->next.idp
+								+ ".jpg");
+				qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/"
+						+ lis->next.idp[0] + "/" + lis->next.idp + ".jpg");
+			} else {
+				if (lis->next.idp > 0)
+					loadNext->load(
+							"http://doc.rmf.pl/media/img_muzyka/plyta/0/"
+									+ lis->next.idp + ".jpg");
+				else {
+					imageNext(new QPixmap(":/zaslepka.jpg"));
+					//imageNext(NULL);
+				}
 
-			qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/0/"
-					+ lis->next.idp + ".jpg");
+				qDebug() << ("http://doc.rmf.pl/media/img_muzyka/plyta/0/"
+						+ lis->next.idp + ".jpg");
+			}
 		}
 	}
 }
@@ -501,3 +577,6 @@ void MainWindow::on_actionUstawienia_triggered() {
 	proxyDial->show();
 }
 
+void MainWindow::options() {
+	optionsDial->show();
+}

@@ -8,19 +8,22 @@ QT += core \
     webkit
 TARGET = MiastoMuzyki
 TEMPLATE = app
-SOURCES += main.cpp \
+SOURCES += options.cpp \
+    main.cpp \
     mainwindow.cpp \
     trackinfo.cpp \
     parser.cpp \
     imageload.cpp \
     proxydialog.cpp
-HEADERS += mainwindow.h \
+HEADERS += options.h \
+    mainwindow.h \
     trackinfo.h \
     parser.h \
     lista.h \
     imageload.h \
     proxydialog.h
-FORMS += oknoprogramu.ui \
+FORMS += options.ui \
+    oknoprogramu.ui \
     proxyDialog.ui
 RESOURCES += resources.qrc
 RC_FILE = myapp.rc

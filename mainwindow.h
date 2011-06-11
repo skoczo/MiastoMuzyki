@@ -35,6 +35,7 @@
 #include "lista.h"
 #include "imageload.h"
 #include "proxydialog.h"
+#include "options.h"
 
 namespace Ui {
 class MainWindow;
@@ -81,6 +82,7 @@ private:
 	QString actualStation;
 
 	proxyDialog *proxyDial;
+	Options *optionsDial;
 
 	QProgressBar *progressBar;
 	Parser *p;
@@ -91,22 +93,37 @@ private:
 
 	void loadDataToList();
 	void hideShow(QWidget*, QWidget*, int);
+	bool newData();
+	void showTrayMessage();
 
 private slots:
 	void on_actionUstawienia_triggered();
 	void on_listWidget_doubleClicked(QModelIndex index);
 	void checkPlayList();
+	//update listy utworow
 	void update();
+	//ustawienie obrazka dla aktualnego utworu
 	void image(QPixmap *p);
+	//ustawienie obrazka dla nastepnego utworu
 	void imageNext(QPixmap *p);
+	//ustawienie proxy dla aplikacji
 	void setProxy(QNetworkProxy p);
+	//funkcja do testowania bufora
 	void test(int i);
+	//ustawienie glosnosci
 	void setVolume(int);
+	// obsluga play\pause
 	void play_pause();
+	//okno informacji o programie
 	void about();
+	//funkcja odbierajaca liste stacji
 	void recive(QMap<QString, QString>*, QMap<QString, QString>*);
+	//jesli nie powiedzie sie odebranie listy stacji
 	void stationsFailed();
+	//jesli ikona kliknieta
 	void iconClicked(QSystemTrayIcon::ActivationReason event);
+	//pokazanie okna opcji
+	void options();
 };
 
 class FastSlider: public QSlider {

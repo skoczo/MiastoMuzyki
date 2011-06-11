@@ -314,7 +314,7 @@
      <x>0</x>
      <y>0</y>
      <width>476</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuUstawienia">
@@ -322,6 +322,7 @@
      <string>Ustawienia</string>
     </property>
     <addaction name="actionUstawienia"/>
+    <addaction name="actionOpcje"/>
    </widget>
    <widget class="QMenu" name="menuPomoc">
     <property name="title">
@@ -341,6 +342,11 @@
   <action name="actionUstawienia">
    <property name="text">
     <string>Proxy</string>
+   </property>
+  </action>
+  <action name="actionOpcje">
+   <property name="text">
+    <string>Opcje</string>
    </property>
   </action>
  </widget>
