@@ -19,7 +19,7 @@ private:
 
 public:
         Parser();
-
+        ~Parser();
 	void start();
 
 private slots:

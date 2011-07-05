@@ -1,5 +1,3 @@
-Będę pisał czasami po polsku dla zaoszczędzenia czasu. Aplikacja jest w sumie dla polskich użytkowników więc developerzy również raczej będą z polski
-
 Program do natywnego odtwarzania stacji z miasta muzyki na linux.
 Autor: Adrian Skoczylas
 
@@ -16,10 +14,14 @@ Plik all.pls: W tym pliku umieszczone są informacje o stacjach. Nie jest to str
 	- dodałem label Ident: jest to numer stacji który jest później wykorzystywany do pobrania danych ze strony
 	- Title: tytuł stacji
 
-TODO: Nie jestem w 100% zadowolony z tego pliku. Parsowane jest tylko po kilku pierwszych znakach. Chciał bym zrobić tak aby pliki i tytuły nie były numerowane i parsowanie odbywało się po całej nazwie pola.
-
 Pliki ui:
 Są trzy pliki ui:
 	- mainwindow.ui - pierwsze okno (aktualnie nie używane), może służyć do testów
 	- oknoprogramu.ui - właściwe okno programu
-	- loader.ui - to miało być okno które będzie wyświetało się podczas ładowania programu, aktualnie wyłączone
+	- proxyDialog.ui - okno z ustawieniami proxy
+	- options.ui - okno z ustawieniami programu
+
+Testy znajdują się w katalogu testy
+
+Testy:
+	- parserTest - test klasy do parsowania stacji pobranych z internetu. Na systemach unix/linux można uruchomić go przez wykonanie skryptu startTest.sh

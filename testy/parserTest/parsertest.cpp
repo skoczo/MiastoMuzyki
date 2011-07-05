@@ -17,10 +17,13 @@ void ParserTest::recive(QMap<QString, QString>* s, QMap<QString, QString>* i)
     test.assert(s->size(),i->size());
 
     QString string = "RMF 20 lat";
-    test.assert((*i)[string].toStdString(), std::string("82"));
+    test.assert(std::string("82"), (*i)[string].toStdString());
 
     string = "RMF Ziom";
-    test.assert((*i)[string].toStdString(), std::string("52"));
+    test.assert(std::string("52"), (*i)[string].toStdString());
+
+    string = "RMF Hot New";
+    test.assert(std::string("27"), (*i)[string].toStdString());
 
     this->a->quit();
 }

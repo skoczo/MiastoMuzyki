@@ -46,8 +46,9 @@ void Parser::finished(QNetworkReply *reply) {
 			tmp.append(stat[i]);
 			i++;
 
-			//get first three chars
-			for (int j = 0; j < 3 && i < stat.length(); j++) {
+			//get tag
+                        while(stat[i] != '=' && i < stat.length())
+			{
 				tmp.append(stat[i]);
 				i++;
 			}
@@ -55,7 +56,7 @@ void Parser::finished(QNetworkReply *reply) {
 			//if it`s file
 			if (tmp == "File") {
 				//gets all chars to '=' char
-				while (stat[i] != '=') {
+				while (stat[i] != '=' && stat[i] == ' ') {
 					i++;
 
 					if (i >= stat.length())
@@ -77,9 +78,9 @@ void Parser::finished(QNetworkReply *reply) {
 				file = tmp;
 			}
 
-			if (tmp == "Iden") {
+			if (tmp == "Ident") {
 				//gets all chars to '=' char
-				while (stat[i] != '=') {
+				while (stat[i] != '=' && stat[i] == ' ') {
 					i++;
 
 					if (i >= stat.length())
@@ -100,9 +101,9 @@ void Parser::finished(QNetworkReply *reply) {
 			}
 
 			//if this is title
-			if (tmp == "Titl") {
+			if (tmp == "Title") {
 				//gets all chars to '=' char
-				while (stat[i] != '=') {
+				while (stat[i] != '=' && stat[i] == ' ') {
 					i++;
 
 					if (i >= stat.length())
