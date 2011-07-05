@@ -18,9 +18,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	splash->show();
 	splash->showMessage(tr("Tworzenie okna"), Qt::AlignCenter | Qt::AlignBottom);
 
-	QStringList capabiliteisList =
-			Phonon::BackendCapabilities::availableMimeTypes();
+	QStringList capabiliteisList = Phonon::BackendCapabilities::availableMimeTypes();
 	capabiliteisList.sort();
+
 	qDebug("########Cap Start###########");
 
 	for (int i = 0; i < capabiliteisList.size(); i++) {
@@ -151,8 +151,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	//file parser
 	//this class add stations to window
-	splash->showMessage(tr("Ładowanie listy stacji"),
-			Qt::AlignCenter | Qt::AlignBottom);
+	splash->showMessage(tr("Ładowanie listy stacji"), Qt::AlignCenter | Qt::AlignBottom);
 
 	p = new Parser();
 	p->start();
@@ -217,16 +216,15 @@ void MainWindow::iconClicked(QSystemTrayIcon::ActivationReason event) {
 void MainWindow::stationsFailed() {
 	splash->finish(this);
 
-	if (QMessageBox::Ok
-			== QMessageBox::information(
-					this,
-					tr("Błąd"),
-					tr(
-							"<center>Błąd przy odbieraniu listy stacji. <br>Ponowić próbę?</center>"),
-					QMessageBox::Ok, QMessageBox::Cancel)) {
+	if (QMessageBox::Ok == QMessageBox::information(
+			this, tr("Błąd"), tr( "<center>Błąd przy odbieraniu listy stacji. <br>Ponowić próbę?</center>"), QMessageBox::Ok, QMessageBox::Cancel))
+	{
 		splash->show();
 		p->start();
-	} else {
+	}
+
+	else
+	{
 		close();
 	}
 }
@@ -522,6 +520,48 @@ void MainWindow::loadDataToList() {
 
 MainWindow::~MainWindow() {
 	delete ui;
+
+        if (mediaObject != NULL)
+		delete mediaObject;
+
+	if (audioOutput != NULL)
+		delete audioOutput;
+
+	if (stations != NULL)
+		delete stations;
+
+	if (identificators != NULL)
+		delete identificators;
+
+        if (timer != NULL)
+                delete timer;
+
+	if (info != NULL)
+		delete info;
+
+	if (lis != NULL)
+		delete lis;
+
+	if (load != NULL)
+		delete load;
+
+	if (loadNext != NULL)
+		delete loadNext;
+
+	if (proxyDial != NULL)
+		delete proxyDial;
+
+	if (optionsDial != NULL)
+		delete optionsDial;
+
+	if (progressBar != NULL)
+		delete progressBar;
+
+	if (p != NULL)
+		delete p;
+
+	if (splash != NULL)
+		delete splash;
 }
 
 /**

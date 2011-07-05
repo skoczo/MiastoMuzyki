@@ -35,6 +35,17 @@ ui(new Ui::proxyDialog)
     }
 }
 
+proxyDialog::~proxyDialog() {
+	if (ui != NULL)
+		delete ui;
+
+	if (ok != NULL)
+		delete ok;
+
+	if (cancel != NULL)
+		delete cancel;
+}
+
 void proxyDialog::type_change(int c)
 {
     if(c==2)

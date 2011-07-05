@@ -9,6 +9,12 @@ imageLoad::imageLoad()
     connect(access,SIGNAL(finished(QNetworkReply*)),this,SLOT(finished(QNetworkReply*)));
 }
 
+imageLoad::~imageLoad()
+{
+	if(access != NULL)
+		delete access;
+}
+
 void imageLoad::load(QString url)
 {
     //get data from url

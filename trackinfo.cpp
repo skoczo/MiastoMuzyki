@@ -10,6 +10,11 @@ trackInfo::trackInfo(QMap<QString,QString> *info,list *l)
     connect(access,SIGNAL(finished(QNetworkReply*)),this,SLOT(finished(QNetworkReply*)));
 }
 
+trackInfo::~trackInfo() {
+	if (access != NULL)
+		delete access;
+}
+
 void trackInfo::setInfo(QMap<QString,QString> *info)
 {
     this->info = info;

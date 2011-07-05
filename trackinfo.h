@@ -23,6 +23,7 @@ private:
 
 public:
     trackInfo(QMap<QString,QString> *info,list *l);
+    ~trackInfo();
     void setInfo(QMap<QString,QString> *info);
 
 private:

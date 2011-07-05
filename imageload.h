@@ -18,6 +18,7 @@ class imageLoad : public QObject
     Q_OBJECT
 public:
     imageLoad();
+    ~imageLoad();
     //get image url
     void load(QString url);
 

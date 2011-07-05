@@ -8,6 +8,11 @@ Parser::Parser() {
 	identyfikatory = new QMap<QString, QString> ;
 }
 
+Parser::~Parser() {
+	if (access != NULL)
+		delete access;
+}
+
 /*
  this function parse all.pls file
  and put information from this file

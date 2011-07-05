@@ -41,10 +41,20 @@ Options::Options(QWidget *parent) :
 			}
 		}
 	}
+
+        delete xmlReader;
+        delete xmlFile;
 }
 
 Options::~Options() {
+	if (ui != NULL)
+		delete ui;
 
+	if (ok != NULL)
+		delete ok;
+
+	if (cancel != NULL)
+		delete cancel;
 }
 
 bool Options::isChecket() {

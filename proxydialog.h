@@ -17,6 +17,7 @@ class proxyDialog : public QDialog
     Q_OBJECT
 public:
     explicit proxyDialog(QWidget *parent=0);
+    ~proxyDialog();
 
 private:
     QWidget *parent;
