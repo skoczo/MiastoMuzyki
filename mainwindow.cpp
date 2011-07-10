@@ -5,196 +5,58 @@ MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent), ui(new Ui::OknoProgramu) {
 	isPlay = false;
 
-	setWindowIcon(QIcon(":/images/icon.ico"));
+	setApplicationSettings();
 
-	//set application name
-	QCoreApplication::setApplicationName("MiastoMuzyki");
-	ui->setupUi(this);
+    splash = new QSplashScreen(this, QPixmap(":/splashHeader.jpg"));
+    splash->show();
+    splash->showMessage(tr("Tworzenie okna"), Qt::AlignCenter | Qt::AlignBottom);
 
-	setWindowTitle("Miasto Muzyki");
 
-	splash = new QSplashScreen(this, QPixmap(":/splashHeader.jpg"));
+    QStringList capabiliteisList = Phonon::BackendCapabilities::availableMimeTypes();
+    capabiliteisList.sort();
+    qDebug("########Cap Start###########");
+    for(int i = 0;i < capabiliteisList.size();i++){
+        qDebug() << QString(capabiliteisList[i]);
+    }
+    qDebug("########Cap End###########");
 
-	splash->show();
-	splash->showMessage(tr("Tworzenie okna"), Qt::AlignCenter | Qt::AlignBottom);
 
-	QStringList capabiliteisList = Phonon::BackendCapabilities::availableMimeTypes();
-	capabiliteisList.sort();
+    //proxy
+    proxyDial = new proxyDialog(this);
+    //options
+    optionsDial = new Options(this);
 
-	qDebug("########Cap Start###########");
+    setWindowObjects();
 
-	for (int i = 0; i < capabiliteisList.size(); i++) {
-		qDebug() << QString(capabiliteisList[i]);
-	}
+    splash->showMessage(tr("Uruchamianie phonon"), Qt::AlignCenter | Qt::AlignBottom);
 
-	qDebug("########Cap End###########");
+    startPhonon();
 
-	//proxy
-	proxyDial = new proxyDialog(this);
+    createMainWindowObjectVariables();
 
-	//options
-	optionsDial = new Options(this);
+    //file parser
+    //this class add stations to window
+    splash->showMessage(tr("Ładowanie listy stacji"), Qt::AlignCenter | Qt::AlignBottom);
 
-	//set description colors
-	ui->tytul->setText(tr("<font color=yellow>Tytuł: </font>"));
-	ui->wykonawca->setText(tr("<font color=yellow>Artysta: </font>"));
-	ui->teraz->setText(tr("<font color=yellow>Teraz leci</font>"));
-	ui->plyta->setText(tr("<font color=yellow>Płyta: </font>"));
-	ui->rok->setText(tr("<font color=yellow>Rok: </font>"));
-
-	ui->label->setText(tr("<font color=yellow>Następna</font>"));
-	ui->label_2->setText(tr("<font color=yellow>Artysta: </font>"));
-	ui->label_3->setText(tr("<font color=yellow>Tytuł: </font>"));
-	ui->label_4->setText(tr("<font color=yellow>Płyta: </font>"));
-	ui->label_5->setText(tr("<font color=yellow>Rok: </font>"));
-
-	//add header with MiastoMuzyki logo
-	ui->header->setPixmap(QPixmap(":/header.jpg").scaledToWidth(250));
-
-	//set background
-	setStyleSheet("QMainWindow { background-color: #182838; }");
-
-	splash->showMessage(tr("Uruchamianie phonon"),
-			Qt::AlignCenter | Qt::AlignBottom);
-	mediaObject = new Phonon::MediaObject(this);
-
-	audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
-
-	if (mediaObject == NULL || mediaObject->errorType() != 0 || audioOutput
-			== NULL) {
-		if (mediaObject != NULL)
-			QMessageBox::critical(
-					this,
-					tr("Błąd!"),
-					tr(
-							"Nie można uruchomić serwera dźwięku.\nByć może jest zjęty przez inny program.")
-							+ tr(
-									"\nAplikacja zostanie zamknięta."
-											+ mediaObject->errorType()),
-					QMessageBox::Ok);
-		else
-			QMessageBox::critical(
-					this,
-					tr("Błąd!"),
-					tr(
-							"Nie można uruchomić serwera dźwięku.\nByć może jest zjęty przez inny program.")
-							+ tr("\nAplikacja zostanie zamknięta."),
-					QMessageBox::Ok);
-		exit(-1);
-	}
-
-	path = Phonon::createPath(mediaObject, audioOutput);
-
-	while (!path.isValid()) {
-		if (QMessageBox::Ok == QMessageBox::critical(this, tr("Błąd!"),
-				tr("Path is not vaild.\nAplikacja zostanie zamknięta."),
-				QMessageBox::Ok | QMessageBox::Retry))
-			exit(-1);
-		else
-			path.reconnect(mediaObject, audioOutput);
-	}
-
-	//debuging audio output
-	if (audioOutput->isMuted()) {
-		std::cout << "Volume: MUTED!\n";
-	} else {
-		std::cout << "Volume: NOT MUTED.\n";
-	}
-	if (mediaObject->state() == Phonon::LoadingState) {
-		std::cout << "state 0\n";
-	}
-	if (mediaObject->isSeekable()) {
-		std::cout << "Seekable!\n";
-	} else {
-		std::cout << "NOT SEEKABLE!\n";
-	}
-
-	//this object gets <station_name,station_url>
-	//need this for play station
-	stations = new QMap<QString, QString> ;
-
-	//this object gets <station_name,station_number>
-	//need this for get actual information about station
-	identificators = new QMap<QString, QString> ;
-
-	//class which load images
-	load = new imageLoad();
-	loadNext = new imageLoad();
-
-	//this is list of tracks (actual and next)
-	lis = new list();
-
-	//this class puts track info to lis
-	//lis get info about actual and next track
-	info = new trackInfo(identificators, lis);
-
-	//progress bar
-	progressBar = new QProgressBar(ui->statusBar);
-
-	//hide progress bar because it does`t work
-	progressBar->setVisible(false);
-	progressBar->setRange(0, 100);
-
-	connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
-
-	//set volume widget
-	//hide old volume widget
-	ui->volume->setVisible(false);
-
-	//new volume widget which set volume to clicked
-	FastSlider * volume = new FastSlider(this);
-
-	volume->setRange(0, 100);
-	volume->setValue(100);
-	volume->setOrientation(Qt::Horizontal);
-	ui->horizontalLayout_5->addWidget(volume);
-
-	//file parser
-	//this class add stations to window
-	splash->showMessage(tr("Ładowanie listy stacji"), Qt::AlignCenter | Qt::AlignBottom);
-
-	p = new Parser();
-	p->start();
-
-	//add parsed data from QMapIterator<QString,QString> to window
-	connect(p, SIGNAL(send(QMap<QString,QString>*,QMap<QString,QString>*)),
+    //download and parse playlist
+    p = new Parser();
+    //add parsed data from QMapIterator<QString,QString> to window
+    connect(p, SIGNAL(send(QMap<QString,QString>*,QMap<QString,QString>*)),
 			this, SLOT(recive(QMap<QString,QString>*,QMap<QString,QString>*)));
-	connect(p, SIGNAL(fail()), this, SLOT(stationsFailed()));
-	connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
+    connect(p, SIGNAL(fail()), this, SLOT(stationsFailed()));
+    p->start();
 
-	//if track info emit e_dane run update function
-	connect(info, SIGNAL(dataReady()), this, SLOT(update()));
-	//this function load actual track image to label
-	connect(load, SIGNAL(image(QPixmap*)), this, SLOT(image(QPixmap*)));
-	//this function load next track image to label
-	connect(loadNext, SIGNAL(image(QPixmap*)), this, SLOT(imageNext(QPixmap*)));
-	//proxy setup
-	connect(proxyDial, SIGNAL(data_ok(QNetworkProxy)), this,
-			SLOT(setProxy(QNetworkProxy)));
-	connect(ui->play_pause, SIGNAL(clicked()), this, SLOT(play_pause()));
+    connectSignalsAndSlots();
 
-	connect(ui->actionO_programie, SIGNAL(triggered()), this, SLOT(about()));
-	connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this,
-			SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
-
-	//play on enter key push
-	connect(ui->listWidget, SIGNAL(activated(QModelIndex)), this,
-			SLOT(on_listWidget_doubleClicked(QModelIndex)));
-
-	connect(ui->actionOpcje, SIGNAL(triggered()), this, SLOT(options()));
-
-	//timer
-	timer = new QTimer(this);
-	//timer run update function
-	connect(timer, SIGNAL(timeout()), this, SLOT(checkPlayList()));
-	//run this function every 5 second
-	timer->start(5000);
-
-	//center
-	move((QApplication::desktop()->width() / 2 - width() / 2),
-			(QApplication::desktop()->height() / 2 - height() / 2));
-
-	audioOutput->setVolume((qreal) 1);
+    //timer
+    timer = new QTimer(this);
+    //timer run update function
+    connect(timer, SIGNAL(timeout()), this, SLOT(checkPlayList()));
+    //run this function every 5 second
+    timer->start(5000);
+    //center
+    move((QApplication::desktop()->width() / 2 - width() / 2), (QApplication::desktop()->height() / 2 - height() / 2));
+    audioOutput->setVolume((qreal)(1));
 
 	tray.setIcon(QIcon(":/images/icon.ico"));
 	tray.show();
@@ -619,4 +481,141 @@ void MainWindow::on_actionUstawienia_triggered() {
 
 void MainWindow::options() {
 	optionsDial->show();
+}
+
+void MainWindow::setApplicationSettings()
+{
+    setWindowIcon(QIcon(":/images/icon.ico"));
+    //set application name
+    QCoreApplication::setApplicationName("MiastoMuzyki");
+    ui->setupUi(this);
+    setWindowTitle("Miasto Muzyki");
+}
+
+void MainWindow::setWindowObjects()
+{
+    //set description colors
+    ui->tytul->setText(tr("<font color=yellow>Tytuł: </font>"));
+    ui->wykonawca->setText(tr("<font color=yellow>Artysta: </font>"));
+    ui->teraz->setText(tr("<font color=yellow>Teraz leci</font>"));
+    ui->plyta->setText(tr("<font color=yellow>Płyta: </font>"));
+    ui->rok->setText(tr("<font color=yellow>Rok: </font>"));
+    ui->label->setText(tr("<font color=yellow>Następna</font>"));
+    ui->label_2->setText(tr("<font color=yellow>Artysta: </font>"));
+    ui->label_3->setText(tr("<font color=yellow>Tytuł: </font>"));
+    ui->label_4->setText(tr("<font color=yellow>Płyta: </font>"));
+    ui->label_5->setText(tr("<font color=yellow>Rok: </font>"));
+    //add header with MiastoMuzyki logo
+    ui->header->setPixmap(QPixmap(":/header.jpg").scaledToWidth(250));
+    //set background
+    setStyleSheet("QMainWindow { background-color: #182838; }");
+}
+
+void MainWindow::startPhonon() {
+	mediaObject = new Phonon::MediaObject(this);
+	audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
+	if (mediaObject == NULL || mediaObject->errorType() != 0 || audioOutput
+			== NULL) {
+		if (mediaObject != NULL)
+			QMessageBox::critical(
+					this,
+					tr("Błąd!"),
+					tr(
+							"Nie można uruchomić serwera dźwięku.\nByć może jest zjęty przez inny program.")
+							+ tr(
+									"\nAplikacja zostanie zamknięta."
+											+ mediaObject->errorType()),
+					QMessageBox::Ok);
+
+		else
+			QMessageBox::critical(
+					this,
+					tr("Błąd!"),
+					tr(
+							"Nie można uruchomić serwera dźwięku.\nByć może jest zjęty przez inny program.")
+							+ tr("\nAplikacja zostanie zamknięta."),
+					QMessageBox::Ok);
+
+		exit(-1);
+	}
+	path = Phonon::createPath(mediaObject, audioOutput);
+	while (!path.isValid()) {
+		if (QMessageBox::Ok == QMessageBox::critical(this, tr("Błąd!"),
+				tr("Path is not vaild.\nAplikacja zostanie zamknięta."),
+				QMessageBox::Ok | QMessageBox::Retry))
+			exit(-1);
+
+		else
+			path.reconnect(mediaObject, audioOutput);
+
+	}
+	//debuging audio output
+	if (audioOutput->isMuted()) {
+		std::cout << "Volume: MUTED!\n";
+	} else {
+		std::cout << "Volume: NOT MUTED.\n";
+	}
+	if (mediaObject->state() == Phonon::LoadingState) {
+		std::cout << "state 0\n";
+	}
+	if (mediaObject->isSeekable()) {
+		std::cout << "Seekable!\n";
+	} else {
+		std::cout << "NOT SEEKABLE!\n";
+	}
+}
+
+void MainWindow::createMainWindowObjectVariables() {
+	//this object gets <station_name,station_url>
+	//need this for play station
+	stations = new QMap<QString, QString> ;
+	//this object gets <station_name,station_number>
+	//need this for get actual information about station
+	identificators = new QMap<QString, QString> ;
+	//class which load images
+	load = new imageLoad();
+	loadNext = new imageLoad();
+	//this is list of tracks (actual and next)
+	lis = new list();
+	//this class puts track info to lis
+	//lis get info about actual and next track
+	info = new trackInfo(identificators, lis);
+	//progress bar
+	progressBar = new QProgressBar(ui->statusBar);
+	//hide progress bar because it does`t work
+	progressBar->setVisible(false);
+	progressBar->setRange(0, 100);
+	//connect(mediaObject, SIGNAL(bufferStatus(int)), this, SLOT(test(int)));
+	//set volume widget
+	//hide old volume widget
+	ui->volume->setVisible(false);
+
+    //new volume widget which set volume to clicked
+	FastSlider *volume = new FastSlider(this);
+	volume->setRange(0, 100);
+	volume->setValue(100);
+	volume->setOrientation(Qt::Horizontal);
+	ui->horizontalLayout_5->addWidget(volume);
+	connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
+}
+
+void MainWindow::connectSignalsAndSlots()
+{
+    //if track info emit e_dane run update function
+    connect(info, SIGNAL(dataReady()), this, SLOT(update()));
+    //this function load actual track image to label
+    connect(load, SIGNAL(image(QPixmap*)), this, SLOT(image(QPixmap*)));
+    //this function load next track image to label
+    connect(loadNext, SIGNAL(image(QPixmap*)), this, SLOT(imageNext(QPixmap*)));
+    //proxy setup
+    connect(proxyDial, SIGNAL(data_ok(QNetworkProxy)), this,
+			SLOT(setProxy(QNetworkProxy)));
+    connect(ui->play_pause, SIGNAL(clicked()), this, SLOT(play_pause()));
+    connect(ui->actionO_programie, SIGNAL(triggered()), this, SLOT(about()));
+    connect(&tray, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this,
+			SLOT(iconClicked(QSystemTrayIcon::ActivationReason)));
+    //play on enter key push
+    connect(ui->listWidget, SIGNAL(activated(QModelIndex)), this,
+			SLOT(on_listWidget_doubleClicked(QModelIndex)));
+    connect(ui->actionOpcje, SIGNAL(triggered()), this, SLOT(options()));
 }

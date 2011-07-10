@@ -31,4 +31,5 @@ void ParserTest::recive(QMap<QString, QString>* s, QMap<QString, QString>* i)
 void ParserTest::fail()
 {
     test.error();
+    this->a->quit();
 }

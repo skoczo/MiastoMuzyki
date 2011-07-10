@@ -52,78 +52,52 @@ public:
 	~MainWindow();
 
 private:
-	//window ui
-	//Ui::MainWindow *ui;
-	Ui::OknoProgramu *ui;
-
-	//phonon objects to play music
-	Phonon::MediaObject *mediaObject;
-	Phonon::AudioOutput *audioOutput;
-	Phonon::Path path;
-
-	/**
-	 *this maps have information about stations
-	 *    stations<station name, station url>
-	 *    identyficators<station name, station number>
-	 */
-	QMap<QString, QString> *stations;
-	QMap<QString, QString> *identificators;
-
-	//variable to check play/stop
-	bool isPlay;
-
-	QTimer *timer;
-	trackInfo *info;
-	list *lis;
-	imageLoad *load;
-	imageLoad *loadNext;
-
-	QString stringChange(QString s);
-	QString actualStation;
-
-	proxyDialog *proxyDial;
-	Options *optionsDial;
-
-	QProgressBar *progressBar;
-	Parser *p;
-
-	QSplashScreen *splash;
-
-	QSystemTrayIcon tray;
-
-	void loadDataToList();
-	void hideShow(QWidget*, QWidget*, int);
-	bool newData();
-	void showTrayMessage();
+    Ui::OknoProgramu *ui;
+    Phonon::MediaObject *mediaObject;
+    Phonon::AudioOutput *audioOutput;
+    Phonon::Path path;
+    QMap<QString,QString> *stations;
+    QMap<QString,QString> *identificators;
+    bool isPlay;
+    QTimer *timer;
+    trackInfo *info;
+    list *lis;
+    imageLoad *load;
+    imageLoad *loadNext;
+    QString stringChange(QString s);
+    QString actualStation;
+    proxyDialog *proxyDial;
+    Options *optionsDial;
+    QProgressBar *progressBar;
+    Parser *p;
+    QSplashScreen *splash;
+    QSystemTrayIcon tray;
+    void connectSignalsAndSlots();
+    void loadDataToList();
+    void hideShow(QWidget*, QWidget*, int);
+    bool newData();
+    void showTrayMessage();
+    void startPhonon();
+    void setApplicationSettings();
+    void setWindowObjects();
+    void createMainWindowObjectVariables();
 
 private slots:
-	void on_actionUstawienia_triggered();
-	void on_listWidget_doubleClicked(QModelIndex index);
-	void checkPlayList();
-	//update listy utworow
-	void update();
-	//ustawienie obrazka dla aktualnego utworu
-	void image(QPixmap *p);
-	//ustawienie obrazka dla nastepnego utworu
-	void imageNext(QPixmap *p);
-	//ustawienie proxy dla aplikacji
-	void setProxy(QNetworkProxy p);
-	//funkcja do testowania bufora
-	void test(int i);
-	//ustawienie glosnosci
-	void setVolume(int);
-	// obsluga play\pause
-	void play_pause();
-	//okno informacji o programie
-	void about();
-	//funkcja odbierajaca liste stacji
-	void recive(QMap<QString, QString>*, QMap<QString, QString>*);
-	//jesli nie powiedzie sie odebranie listy stacji
-	void stationsFailed();
-	//jesli ikona kliknieta
-	void iconClicked(QSystemTrayIcon::ActivationReason event);
-	//pokazanie okna opcji
-	void options();
+    void on_actionUstawienia_triggered();
+    void on_listWidget_doubleClicked(QModelIndex index);
+    void checkPlayList();
+    void update();
+    void image(QPixmap *p);
+    void imageNext(QPixmap *p);
+    void setProxy(QNetworkProxy p);
+    void test(int i);
+    void setVolume(int);
+    void play_pause();
+    void about();
+    void recive(QMap<QString,QString>*, QMap<QString,QString>*);
+    void stationsFailed();
+    void iconClicked(QSystemTrayIcon::ActivationReason event);
+    void options();
 };
 
 class FastSlider: public QSlider {
